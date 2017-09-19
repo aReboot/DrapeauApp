@@ -10,6 +10,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Ajout commentaire Joffrey version 2
-        //ajout commentaire Big
+        //ajout commentaire BigBro
     }
 }
