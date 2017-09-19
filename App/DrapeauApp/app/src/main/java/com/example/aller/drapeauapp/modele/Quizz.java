@@ -16,7 +16,7 @@ public class Quizz {
     private int numero;
 
 
-    @DatabaseField (canBeNull = false, foreign = true,foreignAutoRefresh=true)
+    @DatabaseField (canBeNull = true, foreign = true)
     private int idUtilisateur;
 
 
