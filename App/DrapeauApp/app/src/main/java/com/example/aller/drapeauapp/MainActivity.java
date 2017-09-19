@@ -11,5 +11,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Ajout commentaire Joffrey version 2
         //ajout commentaire BigBro
+        // nique ta mère
     }
 }
