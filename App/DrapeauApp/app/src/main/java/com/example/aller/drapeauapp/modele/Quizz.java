@@ -17,7 +17,7 @@ public class Quizz {
 
 
     @DatabaseField (canBeNull = true, foreign = true)
-    private int idUtilisateur;
+    private Utilisateur idUtilisateur;
 
 
 
