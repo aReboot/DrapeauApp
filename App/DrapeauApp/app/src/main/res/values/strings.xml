@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">DrapeauApp</string>
+    <string name="Utilisateur">Utilisateur</string>
+    <string name="utilisateur">utilisateur</string>
+    <string name="Quizz">Quizz</string>
+    <string name="quizz">quizz</string>
+    <string name="Drapeau">Drapeau</string>
+    <string name="drapeau">drapeau</string>
+
 </resources>
