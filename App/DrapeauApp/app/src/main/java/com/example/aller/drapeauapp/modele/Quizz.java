@@ -16,8 +16,12 @@ public class Quizz {
     private int numero;
 
 
-    @DatabaseField (canBeNull = false, foreign = true,foreignAutoRefresh=true)
-    private int idUtilisateur;
+    @DatabaseField
+    private int score;
+
+
+    @DatabaseField (canBeNull = true, foreign = true)
+    private Utilisateur idUtilisateur;
 
 
 
@@ -51,8 +55,20 @@ public class Quizz {
         return numero;
     }
 
+    public int getScore() {
+        return score;
+    }
 
 
+    /*
+*###################################################################################################
+####################################################################################################
+--------------------------------------------SETTERS------------------------------------------------
+####################################################################################################
+####################################################################################################
+*/
 
-
+    public void setScore(int score) {
+        this.score = score;
+    }
 }//end.
