@@ -3,7 +3,7 @@ package com.example.aller.drapeauapp.modele;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by aller on 19/09/2017.
