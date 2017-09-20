@@ -2,6 +2,7 @@ package com.example.aller.drapeauapp.modele.webservice;
 
 import android.util.Log;
 
+import com.example.aller.drapeauapp.modele.Results;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -52,7 +53,7 @@ public class Webservice {
                 Log.i("webservice", "getResults: inputStream non null");
                 InputStreamReader reader = new InputStreamReader(inputStream);
                 Log.i("webservice", "getResults: reader ok !");
-                return objectMapper.readValue(inputStream, new TypeReference<List<Results>>(){});
+                Log.i("webservice", "getResults: " + objectMapper.readValue(inputStream, new TypeReference<List<Results>>(){}).toString());
             }
         } catch (Exception e) {
             Log.e("webservice", "Impossible de rapatrier les données : ");

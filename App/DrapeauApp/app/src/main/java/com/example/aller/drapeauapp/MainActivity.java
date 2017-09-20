@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.aller.drapeauapp.modele.Results;
 import com.example.aller.drapeauapp.modele.webservice.Webservice;
 
 import java.util.ArrayList;
@@ -29,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Webservice webservice = new Webservice();
-                List<Results> resultsList = new ArrayList<Results>();
-                resultsList = webservice.getResults();
-                Log.i("webservice", "run: " + resultsList.get(0).getName());
+                webservice.getResults();
             }
         }).start();
 
