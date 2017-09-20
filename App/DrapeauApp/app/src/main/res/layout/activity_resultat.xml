@@ -1,5 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutActivityResultat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+    <Button
+        android:id="@+id/buttonRecommencer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="18dp"
+        android:text="Recommencer"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/buttonRetourAuMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonRecommencer"
+        android:layout_alignBottom="@+id/buttonRecommencer"
+        android:layout_marginStart="51dp"
+        android:layout_toEndOf="@+id/buttonRecommencer"
+        android:text="Retour au menu"
+        android:textColor="@android:color/white" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayoutActivityResultat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/buttonRetourAuMenu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/background_dark">
+
+        <TextView
+            android:id="@+id/textViewScoreActivityResultat"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="0dp"
+            android:background="@android:color/holo_orange_light"
+            android:text="TextView"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutActivityResultat"
+            android:layout_width="0dp"
+            android:layout_height="390dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewScoreActivityResultat"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1">
+
+            <ListView
+                android:id="@+id/listViewActivityResultat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>
