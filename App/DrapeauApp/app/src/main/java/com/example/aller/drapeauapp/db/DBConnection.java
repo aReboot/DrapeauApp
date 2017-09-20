@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.aller.drapeauapp.modele.Associer;
 import com.example.aller.drapeauapp.modele.Drapeau;
 import com.example.aller.drapeauapp.modele.Quizz;
-import com.example.aller.drapeauapp.modele.Utilisateur;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;

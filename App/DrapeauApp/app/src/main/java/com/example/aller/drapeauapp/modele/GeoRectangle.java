@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "North",
     "South"
 })
+
 public class GeoRectangle {
 
     @JsonProperty("West")

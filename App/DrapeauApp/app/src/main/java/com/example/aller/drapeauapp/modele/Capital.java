@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "Name",
     "GeoPt"
 })
+
 public class Capital {
 
     @JsonProperty("DLST")

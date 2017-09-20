@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "Results",
     "StatusCode"
 })
+
 public class Pays {
 
     @JsonProperty("StatusMsg")

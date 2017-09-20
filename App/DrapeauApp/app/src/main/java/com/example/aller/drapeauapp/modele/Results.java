@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "CountryCodes",
     "CountryInfo"
 })
+
 public class Results {
 
     @JsonProperty("Name")
