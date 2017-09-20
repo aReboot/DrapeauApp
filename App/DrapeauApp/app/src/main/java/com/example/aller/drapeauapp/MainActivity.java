@@ -6,23 +6,18 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.aller.drapeauapp.db.DBConnection;
-import com.example.aller.drapeauapp.modele.Drapeau;
-import com.example.aller.drapeauapp.modele.Quizz;
-import com.example.aller.drapeauapp.modele.Utilisateur;
-import com.example.aller.drapeauapp.thread.TimerHandler;
-import com.example.aller.drapeauapp.thread.TimerHandlerImplementation;
+import com.example.aller.drapeauapp.modele.webservice.Webservice;
 
-import org.w3c.dom.Text;
-
-import java.sql.SQLException;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private TextView textViewBdd;
     private TextView textViewUrl;
+    private TextView textViewPseudo;
+    private TextView textViewDate;
     private TextView textViewScore;
 
     @Override
@@ -30,36 +25,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DBConnection connectionAlaBase = new DBConnection(this, "testRemplissageBisb", null, 1);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Webservice webservice = new Webservice();
+                List<Results> resultsList = new ArrayList<Results>();
+                resultsList = webservice.getResults();
+                Log.i("webservice", "run: " + resultsList.get(0).getName());
+            }
+        }).start();
 
-        Drapeau france = new Drapeau("France","http://www.geognos.com/api/en/countries/flag/FR.png");
-
-        Quizz numUn = new Quizz(3);
-
-
-        try {
-            DBConnection.daoDrapeau.createIfNotExists(france);
-
-            DBConnection.daoQuizz.createIfNotExists(numUn);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        textViewBdd = (TextView)findViewById(R.id.textViewInfo);
-        textViewUrl = (TextView)findViewById(R.id.textViewUrl);
-
-        textViewScore = (TextView)findViewById(R.id.textViewScore);
-
-        try {
-            this.textViewBdd.setText(DBConnection.daoDrapeau.queryForId("France").getPays());
-            this.textViewUrl.setText(DBConnection.daoDrapeau.queryForId("France").getImage());
-
-
-            System.out.println("Score "+DBConnection.daoQuizz.queryForAll().get(0));
-            //this.textViewScore.setText(DBConnection.daoQuizz.queryForId(numUn.getNumero()).getScore());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
 

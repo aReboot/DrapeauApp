@@ -2,9 +2,9 @@ package com.example.aller.drapeauapp.modele.webservice;
 
 import android.util.Log;
 
-import com.example.aller.drapeauapp.modele.Drapeau;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,32 +20,39 @@ public class Webservice {
 
     private final String url = "http://www.geognos.com/api/en/countries/info/all.json";
 
-    Gson gson;
+    ObjectMapper objectMapper;
 
     public Webservice() {
-        gson = new Gson();
+        objectMapper = new ObjectMapper();
     }
 
     private InputStream sendRequest(URL url) throws Exception {
+        Log.i("webservice", "sendRequest: url = " + url.toString());
         try {
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            Log.i("webservice", "sendRequest: ouverture connexion");
             urlConnection.connect();
+            Log.i("webservice", "sendRequest: connexion");
             if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                Log.i("webservice", "sendRequest: reponse du serveur = ok !");
                 return urlConnection.getInputStream();
             }
         } catch (Exception e) {
-            Log.i("webservice", "sendRequest: erreur");
+            Log.i("webservice", "sendRequest: erreur ! " + url.toString());
             throw new Exception("Erreur Webservice");
         }
         return null;
     }
 
-    public List<Drapeau> getDrapeaux() {
+    public List<Results> getResults() {
         try {
-            InputStream inputStream = sendRequest(new URL(url));
+            InputStream inputStream = sendRequest(new URL(this.url));
+            Log.i("webservice", "getResults: requête envoyé");
             if (inputStream != null) {
+                Log.i("webservice", "getResults: inputStream non null");
                 InputStreamReader reader = new InputStreamReader(inputStream);
-                return gson.fromJson(reader, new TypeToken<List<Drapeau>>(){}.getType());
+                Log.i("webservice", "getResults: reader ok !");
+                return objectMapper.readValue(inputStream, new TypeReference<List<Results>>(){});
             }
         } catch (Exception e) {
             Log.e("webservice", "Impossible de rapatrier les données : ");
