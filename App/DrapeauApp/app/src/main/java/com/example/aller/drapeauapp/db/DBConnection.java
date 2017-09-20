@@ -2,6 +2,7 @@ package com.example.aller.drapeauapp.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.util.Pair;
 
 import com.example.aller.drapeauapp.modele.Associer;
 import com.example.aller.drapeauapp.modele.Drapeau;
