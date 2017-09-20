@@ -39,6 +39,9 @@ public class Utilisateur {
 
     }
 
+    public Utilisateur(String pseudo) {
+        this.pseudo = pseudo;
+    }
 
     //Constructeur avec arguments
     public Utilisateur(String pseudoUtilisateur, Date dateJeu ){
@@ -46,9 +49,14 @@ public class Utilisateur {
         this.date=dateJeu;
     }
 
+    public Utilisateur(int idUtilisateur, String pseudo, Date date) {
+        this.idUtilisateur = idUtilisateur;
+        this.pseudo = pseudo;
+        this.date = date;
+    }
 
 
-/*
+    /*
 *###################################################################################################
 ####################################################################################################
 --------------------------------------------METHODES------------------------------------------------
@@ -68,9 +76,11 @@ public class Utilisateur {
         this.date=date;
     }
 
+    public void setIdUtilisateur(int idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
 
-
-/*
+    /*
 *###################################################################################################
 ####################################################################################################
 --------------------------------------------GUETTERS------------------------------------------------

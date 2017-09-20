@@ -20,11 +20,6 @@ public class Quizz {
     private int score;
 
 
-    @DatabaseField (canBeNull = true, foreign = true)
-    private Utilisateur idUtilisateur;
-
-
-
 /*
 *###################################################################################################
 ####################################################################################################
@@ -39,9 +34,8 @@ public class Quizz {
 
     }
 
-    public Quizz(int score, Utilisateur idUtilisateur) {
+    public Quizz(int score) {
         this.score = score;
-        this.idUtilisateur = idUtilisateur;
     }
 
     /*

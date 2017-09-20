@@ -25,7 +25,7 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
 
     public static Dao<Quizz, Integer> daoQuizz;
 
-    public static Dao<Utilisateur, Integer> daoUtilisateur;
+
 
 
     //CONSTRUCTEUR qui initialise nos Dao
@@ -34,7 +34,7 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
         try {
             DBConnection.daoDrapeau = DaoManager.createDao(connectionSource, Drapeau.class);
             DBConnection.daoQuizz = DaoManager.createDao(connectionSource, Quizz.class);
-            DBConnection.daoUtilisateur = DaoManager.createDao(connectionSource, Utilisateur.class);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
 
             TableUtils.createTable(connectionSource, Quizz.class);
 
-            TableUtils.createTable(connectionSource, Utilisateur.class);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,7 +73,7 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
 
             TableUtils.dropTable(connectionSource, Quizz.class, true);
 
-            TableUtils.dropTable(connectionSource, Utilisateur.class, true);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
