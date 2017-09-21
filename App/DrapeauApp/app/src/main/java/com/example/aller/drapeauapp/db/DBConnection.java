@@ -2,6 +2,7 @@ package com.example.aller.drapeauapp.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.util.Pair;
 
 import com.example.aller.drapeauapp.modele.Associer;
 import com.example.aller.drapeauapp.modele.Drapeau;
@@ -22,9 +23,8 @@ import java.sql.SQLException;
 public class DBConnection extends OrmLiteSqliteOpenHelper{
 
     public static Dao<Drapeau, String> daoDrapeau;
-
+    public  static  Dao<Associer, Pair<Drapeau, Quizz>> daoAssocierPair;
     public static Dao<Quizz, Integer> daoQuizz;
-
 
 
 
@@ -33,6 +33,7 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
         super(context, databaseName, factory, databaseVersion);
         try {
             DBConnection.daoDrapeau = DaoManager.createDao(connectionSource, Drapeau.class);
+            DBConnection.daoAssocierPair = DaoManager.createDao(connectionSource, Associer.class);
             DBConnection.daoQuizz = DaoManager.createDao(connectionSource, Quizz.class);
 
         } catch (SQLException e) {
@@ -55,7 +56,6 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
             TableUtils.createTable(connectionSource, Quizz.class);
 
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,14 +69,13 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
 
             TableUtils.dropTable(connectionSource, Drapeau.class, true);
 
-            TableUtils.dropTable(connectionSource, Associer.class, true);
+            TableUtils.dropTable(connectionSource, Associer.class,true);
 
             TableUtils.dropTable(connectionSource, Quizz.class, true);
-
-
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 }
+
