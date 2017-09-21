@@ -3,14 +3,13 @@ package com.example.aller.drapeauapp.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.util.Pair;
+import android.util.Log;
 
 import com.example.aller.drapeauapp.modele.Associer;
 import com.example.aller.drapeauapp.modele.Drapeau;
 import com.example.aller.drapeauapp.modele.Quizz;
-import com.example.aller.drapeauapp.modele.Utilisateur;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -22,23 +21,20 @@ import java.sql.SQLException;
 
 public class DBConnection extends OrmLiteSqliteOpenHelper{
 
-    public static Dao<Drapeau, String> daoDrapeau;
-    public  static  Dao<Associer, Pair<Drapeau, Quizz>> daoAssocierPair;
-    public static Dao<Quizz, Integer> daoQuizz;
+    public Dao<Drapeau, String> daoDrapeau;
+
+    public Dao<Quizz, Integer> daoQuizz;
+
+    public Dao<Associer, Pair<Drapeau, Quizz>> daoAssocierPair;
+
 
 
 
     //CONSTRUCTEUR qui initialise nos Dao
     public DBConnection(Context context, String databaseName, SQLiteDatabase.CursorFactory factory, int databaseVersion) {
         super(context, databaseName, factory, databaseVersion);
-        try {
-            DBConnection.daoDrapeau = DaoManager.createDao(connectionSource, Drapeau.class);
-            DBConnection.daoAssocierPair = DaoManager.createDao(connectionSource, Associer.class);
-            DBConnection.daoQuizz = DaoManager.createDao(connectionSource, Quizz.class);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Log.i("DATABASE","Constructeur DBConnection invoked");
 
     }
 
@@ -51,14 +47,15 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
 
             TableUtils.createTable(connectionSource, Drapeau.class);
 
-            TableUtils.createTable(connectionSource, Associer.class);
-
             TableUtils.createTable(connectionSource, Quizz.class);
 
+            TableUtils.createTable(connectionSource, Associer.class);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        Log.i("DATABASE","Création des tables ok");
 
     }
 
@@ -66,16 +63,36 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
+            TableUtils.dropTable(connectionSource, Associer.class,true);
 
             TableUtils.dropTable(connectionSource, Drapeau.class, true);
-
-            TableUtils.dropTable(connectionSource, Associer.class,true);
 
             TableUtils.dropTable(connectionSource, Quizz.class, true);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Dao<Drapeau, String> getDaoDrapeau() throws SQLException{
+        if (daoDrapeau == null){
+            daoDrapeau = getDao(Drapeau.class);
+        }
+        return daoDrapeau;
+    }
+
+    public Dao<Quizz, Integer> getDaoQuizz() throws SQLException {
+        if (daoQuizz == null) {
+            daoQuizz = getDao(Quizz.class);
+        }
+        return daoQuizz;
+    }
+
+    public  Dao<Associer, Pair<Drapeau, Quizz>> getDaoAssocierPair() throws SQLException {
+        if (daoAssocierPair == null){
+            daoAssocierPair = getDao(Associer.class);
+        }
+        return daoAssocierPair;
     }
 }
 

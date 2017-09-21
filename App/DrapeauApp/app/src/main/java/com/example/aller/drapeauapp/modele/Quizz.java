@@ -16,9 +16,6 @@ public class Quizz {
     private int numero;
 
 
-    @DatabaseField
-    private int score;
-
 
 /*
 *###################################################################################################
@@ -34,9 +31,6 @@ public class Quizz {
 
     }
 
-    public Quizz(int score) {
-        this.score = score;
-    }
 
     /*
 *###################################################################################################
@@ -51,9 +45,6 @@ public class Quizz {
         return numero;
     }
 
-    public int getScore() {
-        return score;
-    }
 
 
     /*
@@ -64,7 +55,7 @@ public class Quizz {
 ####################################################################################################
 */
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 }//end.

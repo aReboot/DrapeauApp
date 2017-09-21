@@ -14,11 +14,11 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Associer {
 
 
-    @ForeignCollectionField(eager = false)
-    ForeignCollection<Drapeau> drapeaus;
+    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, uniqueCombo = true)
+    Drapeau drapeaux;
 
-    @ForeignCollectionField(eager = false)
-    ForeignCollection<Quizz> quizzs;
+    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, uniqueCombo = true)
+    Quizz quizzs;
 
     @DatabaseField
     private int sens;
@@ -38,15 +38,13 @@ public class Associer {
     public Associer() {
     }
 
-
-    public Associer(ForeignCollection<Drapeau> drapeaus, ForeignCollection<Quizz> quizzs, int sens) {
-        this.drapeaus = drapeaus;
+    public Associer(Drapeau drapeaux, Quizz quizzs, int sens) {
+        this.drapeaux = drapeaux;
         this.quizzs = quizzs;
         this.sens = sens;
     }
 
-
-/*
+    /*
 *###################################################################################################
 ####################################################################################################
 --------------------------------------------GUETTERS------------------------------------------------
@@ -54,20 +52,21 @@ public class Associer {
 ####################################################################################################
 */
 
-    public ForeignCollection<Drapeau> getDrapeaus() {
-        return drapeaus;
-    }
 
-    public ForeignCollection<Quizz> getQuizzs() {
-        return quizzs;
-    }
 
     public int getSens() {
         return sens;
     }
 
+    public Drapeau getDrapeaux() {
+        return drapeaux;
+    }
 
-/*
+    public Quizz getQuizzs() {
+        return quizzs;
+    }
+
+    /*
 *###################################################################################################
 ####################################################################################################
 --------------------------------------------METHODES------------------------------------------------
@@ -75,11 +74,11 @@ public class Associer {
 ####################################################################################################
 */
 
-    public void setDrapeaus(ForeignCollection<Drapeau> drapeaus) {
-        this.drapeaus = drapeaus;
+    public void setDrapeaux(Drapeau drapeaux) {
+        this.drapeaux = drapeaux;
     }
 
-    public void setQuizzs(ForeignCollection<Quizz> quizzs) {
+    public void setQuizzs(Quizz quizzs) {
         this.quizzs = quizzs;
     }
 
