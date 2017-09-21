@@ -3,6 +3,8 @@ package com.example.aller.drapeauapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -11,8 +13,10 @@ import com.example.aller.drapeauapp.modele.webservice.Webservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ProgressBar progressBar;
     private TextView textViewBdd;
@@ -21,10 +25,22 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewDate;
     private TextView textViewScore;
 
+    private Button buttonTest;
+    private Random randomGenerator;
+    private int randomInt;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        buttonTest= (Button) findViewById(R.id.buttonTest);
+        buttonTest.setOnClickListener(this);
+        randomGenerator=new Random();
+
+
 
         new Thread(new Runnable() {
             @Override
@@ -33,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 webservice.getResults();
             }
         }).start();
+
 
     }
 
@@ -49,4 +66,13 @@ public class MainActivity extends AppCompatActivity {
         On utilisera ici la méthode setProgressBar(0) sur la progressBar
          */
     }
-}
+
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.buttonTest){
+            randomInt=randomGenerator.nextInt(2);
+            Log.i("Info", "teste generation d'un int aleatoire"+ String.valueOf(randomInt));
+        }
+    }
+}//end.

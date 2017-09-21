@@ -8,13 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzImage;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzTexte;
 
+import java.util.Random;
+
 /**
  * Created by aller on 19/09/2017.
  */
 
 public class FragmentsActivity extends AppCompatActivity{
 
-
+    //Random
+    private Random random;
 
     //Fragment
     private FragmentsQuizzImage fragmentsQuizzImage;
@@ -56,7 +59,7 @@ public class FragmentsActivity extends AppCompatActivity{
         fragmentsQuizzTexte=new FragmentsQuizzTexte();
 
 
-        
+
 
 
 
