@@ -97,19 +97,6 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
     }
 
 
-    //Methode pour la progresse bar
-    public void incrementProgressBar() {
-            /*
-            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
-             */
-    }
-
-    public void resetProgressBar() {
-            /*
-            On utilisera ici la méthode setProgressBar(0) sur la progressBar
-             */
-    }
-
 
 
     //redefinition de la methode onClick pour les actions des buttonImages

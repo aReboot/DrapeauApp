@@ -108,17 +108,7 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
     }
 
 
-    public void incrementProgressBar() {
-            /*
-            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
-             */
-    }
 
-    public void resetProgressBar() {
-            /*
-            On utilisera ici la méthode setProgressBar(0) sur la progressBar
-             */
-    }
 
     //Redefintion de la methode onClick pour les actions des boutons
     @Override

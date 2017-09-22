@@ -81,8 +81,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	    /////////////////////////////////////////////////////////////////////////////////
 
+    //Methode pour la progresse bar
+    public void incrementProgressBar() {
+            /*
+            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
+             */
+    }
 
-        //Redefinition de la methode onClick pour les action des buttons.
+    public void resetProgressBar() {
+            /*
+            On utilisera ici la méthode setProgressBar(0) sur la progressBar
+             */
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Redefinition de la methode onClick pour les action des buttons.
         @Override
         public void onClick(View view) {
 
