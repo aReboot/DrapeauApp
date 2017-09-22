@@ -21,6 +21,10 @@ import java.sql.SQLException;
 
 public class DBConnection extends OrmLiteSqliteOpenHelper{
 
+    private static final String DATABASE_NAME = "Nationalquizz.db";
+
+    private static  final int DATABASE_VERSION = 1;
+
     public Dao<Drapeau, String> daoDrapeau;
 
     public Dao<Quizz, Integer> daoQuizz;
@@ -30,9 +34,9 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
 
 
 
-    //CONSTRUCTEUR qui initialise nos Dao
-    public DBConnection(Context context, String databaseName, SQLiteDatabase.CursorFactory factory, int databaseVersion) {
-        super(context, databaseName, factory, databaseVersion);
+    //CONSTRUCTEUR
+    public DBConnection(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
         Log.i("DATABASE","Constructeur DBConnection invoked");
 
