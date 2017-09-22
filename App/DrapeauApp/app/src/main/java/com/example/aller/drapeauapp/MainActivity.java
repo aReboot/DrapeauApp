@@ -39,47 +39,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }).start();
 
-        DBConnection dbConnection = new DBConnection(this, "newbase.db", null, 1);
-
-        Drapeau allemagne = new Drapeau("Allemagne","http://www.geognos.com/api/en/countries/flag/FR.png");
-
-        Quizz quizz2 = new Quizz();
-
-
-        try {
-            dbConnection.getDaoDrapeau().createIfNotExists(allemagne);
-
-            dbConnection.getDaoQuizz().createIfNotExists(quizz2);
-           // DBConnection.daoAssocierPair.createIfNotExists(associer);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        Associer associer = null;
-        try {
-            associer = new Associer(dbConnection.daoDrapeau.queryForId("Allemagne"),dbConnection.daoQuizz.queryForId(2), 1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            dbConnection.getDaoAssocierPair().createIfNotExists(associer);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        textViewBdd = (TextView)findViewById(R.id.textViewInfo);
-        textViewUrl = (TextView)findViewById(R.id.textViewUrl);
-        textViewScore = (TextView)findViewById(R.id.textViewScore);
-
-        try {
-            this.textViewBdd.setText(dbConnection.daoDrapeau.queryForId("France").getPays());
-            this.textViewUrl.setText(String.valueOf(dbConnection.daoQuizz.queryForId(1).getNumero()));
-            //this.textViewScore.setText(String.valueOf(dbConnection.daoAssocierPair.queryForAll().get(0).getSens()));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
     }
 
