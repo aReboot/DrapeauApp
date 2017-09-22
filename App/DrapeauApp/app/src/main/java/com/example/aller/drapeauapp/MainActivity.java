@@ -116,5 +116,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.i("info","passage a l'activité fragmentActivity");
         Intent intent=new Intent(MainActivity.this, FragmentsActivity.class);
         startActivity(intent);
-    }
 }
