@@ -1,9 +1,12 @@
 package com.example.aller.drapeauapp.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,8 @@ import com.example.aller.drapeauapp.R;
 
 public class FragmentsQuizzTexte extends Fragment implements View.OnClickListener{
 
+    //FramgmentActivity
+    private FragmentActivity fragmentActivity;
 
     //ImageView
     private ImageView imageViewQuizzTexte;
@@ -31,6 +36,8 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
 
 
+    //Interface
+    private FragmentChanger mFragmentChanger;
 
 /*
 *###################################################################################################
@@ -80,18 +87,28 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
 
 
+    //redefintion de la methode onAttach
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            mFragmentChanger = (FragmentChanger) context;
+        }catch(ClassCastException e){
+            throw new ClassCastException(context.toString() + " Erreur onAttach");
+        }
+    }
 
 
+    public interface FragmentChanger {
+        public void remplacementDunFragmentUneFoisLeQuizzLance();
+    }
 
 
     @Override
     public void onClick(View view) {
-
+        Log.i("info","click sur un Button");
+        mFragmentChanger.remplacementDunFragmentUneFoisLeQuizzLance();
     }
-
-
-
-
 
 
 }//end.
