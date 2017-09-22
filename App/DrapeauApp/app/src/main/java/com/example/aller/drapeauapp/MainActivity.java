@@ -8,8 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+
 
 import com.example.aller.drapeauapp.modele.Country;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,25 +27,40 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-        private ProgressBar progressBar;
-        private TextView textViewBdd;
-        private TextView textViewUrl;
-        private TextView textViewPseudo;
-        private TextView textViewDate;
-        private TextView textViewScore;
+
 
         //Button
-        private Button buttonTest;
+        private Button buttonCommencer;
+        private Button buttonQuitter;
 
+
+
+
+/*
+*###################################################################################################
+####################################################################################################
+--------------------------------------------METHODES------------------------------------------------
+####################################################################################################
+####################################################################################################
+*/
+
+        //Redefinition de la methode onCreate
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_main);
 
-            buttonTest=(Button)findViewById(R.id.buttonTest);
-            buttonTest.setOnClickListener(this);
+
+			//Buttons
+            buttonCommencer=(Button)findViewById(R.id.buttonCommencerMainActivity);
+            buttonCommencer.setOnClickListener(this);
+
+            buttonQuitter=(Button)findViewById(R.id.buttonQuitterMainActivity);
+            buttonQuitter.setOnClickListener(this);
 
 
+
+            //WebService
 		Webservice webservice = new Webservice();
 		webservice.execute("http://www.geognos.com/api/en/countries/info/all.json");
 		List<Country> countryList = new ArrayList<>();
@@ -65,31 +79,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	}
 
-        public void incrementProgressBar() {
-            /*
-            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
-             */
-        }
-
-        public void resetProgressBar() {
-            /*
-            On utilisera ici la méthode setProgressBar(0) sur la progressBar
-             */
-        }
+	    /////////////////////////////////////////////////////////////////////////////////
 
 
-
+        //Redefinition de la methode onClick pour les action des buttons.
         @Override
         public void onClick(View view) {
-            Intent intent= new Intent(MainActivity.this, FragmentsActivity.class);
-            startActivity(intent);
+
+            if(view.getId()==R.id.buttonCommencerMainActivity){
+                Intent intent= new Intent(MainActivity.this, FragmentsActivity.class);
+                startActivity(intent);
+            }else{
+                System.exit(0);
+            }
+
     }
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
+/*
+*###################################################################################################
+####################################################################################################
+----------------------------------PRIVATE CLASS WEB SERVICE-----------------------------------------
+####################################################################################################
+####################################################################################################
+*/
     private class Webservice extends AsyncTask<String, String, List<Country>> {
 
 		@Override
@@ -155,4 +171,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 			super.onPostExecute(s);
 		}
 	}
-}
+
+
+
+
+}//end.

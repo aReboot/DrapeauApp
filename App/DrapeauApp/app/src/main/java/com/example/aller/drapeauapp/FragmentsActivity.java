@@ -5,11 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
+
 
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzImage;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzTexte;
-import com.example.aller.drapeauapp.thread.FragmentChanger;
+
 
 import java.util.Random;
 
@@ -72,7 +72,7 @@ public class FragmentsActivity extends AppCompatActivity implements FragmentsQui
 
 
             ////////////////////////////////////////////////////////////////////////
-                    //Systeme aleatoire des Fragments
+                    //Systeme aleatoire des Fragments au lancement de la partie
     
     //Methode pour le debut de transaction pour eviter une repetition dans le code
     public void debutDeTransaction(){
@@ -117,8 +117,6 @@ public class FragmentsActivity extends AppCompatActivity implements FragmentsQui
 
 
 
-
-
     //Methode pour le choix du fragment en aleatoire au debut.
 
     public void chargementDunFragmentEnAleatoireAuDebut(){
@@ -153,8 +151,7 @@ public class FragmentsActivity extends AppCompatActivity implements FragmentsQui
     }
 
 
-    //Methode pour remplacer un fragment une fois le quizz lance
-
+    //Methode pour remplacer un fragment une fois le quizz lancé
     @Override
     public void remplacementDunFragmentUneFoisLeQuizzLance() {
         randomInt=randomGenerateur.nextInt(2);

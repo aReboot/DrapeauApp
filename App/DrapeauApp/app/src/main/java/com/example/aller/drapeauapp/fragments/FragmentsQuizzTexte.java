@@ -85,9 +85,18 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
     }
 
 
+        /////////////////////////////////////////////////////////////////////////////////
 
 
-    //redefintion de la methode onAttach
+
+    //Interface pour le changement de fragment
+    public interface FragmentChanger {
+        public void remplacementDunFragmentUneFoisLeQuizzLance();
+    }
+
+
+
+    //redefintion de la methode onAttach pour le changement de fragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -99,11 +108,19 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
     }
 
 
-    public interface FragmentChanger {
-        public void remplacementDunFragmentUneFoisLeQuizzLance();
+    public void incrementProgressBar() {
+            /*
+            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
+             */
     }
 
+    public void resetProgressBar() {
+            /*
+            On utilisera ici la méthode setProgressBar(0) sur la progressBar
+             */
+    }
 
+    //Redefintion de la methode onClick pour les actions des boutons
     @Override
     public void onClick(View view) {
         Log.i("info","click sur un Button");

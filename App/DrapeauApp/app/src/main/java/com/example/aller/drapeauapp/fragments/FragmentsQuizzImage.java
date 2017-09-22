@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.aller.drapeauapp.R;
-import com.example.aller.drapeauapp.thread.FragmentChanger;
+
 
 /**
  * Created by aller on 19/09/2017.
@@ -77,8 +77,15 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
         return view;
     }
 
+        //////////////////////////////////////////////////////////////////////////////////////
 
-    //redefintion de la methode onAttach
+    //Interface pour le changement de fragment
+    public interface FragmentChanger {
+        public void remplacementDunFragmentUneFoisLeQuizzLance();
+    }
+
+
+    //redefintion de la methode onAttach pour le changement de fragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -90,13 +97,22 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
     }
 
 
+    //Methode pour la progresse bar
+    public void incrementProgressBar() {
+            /*
+            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
+             */
+    }
 
-    public interface FragmentChanger {
-        public void remplacementDunFragmentUneFoisLeQuizzLance();
+    public void resetProgressBar() {
+            /*
+            On utilisera ici la méthode setProgressBar(0) sur la progressBar
+             */
     }
 
 
 
+    //redefinition de la methode onClick pour les actions des buttonImages
     @Override
     public void onClick(View view) {
         Log.i("info","click sur une reponse");
