@@ -13,6 +13,9 @@ public class Drapeau {
     private String pays;
 
     @DatabaseField
+    private String codePays;
+
+    @DatabaseField //@DatabaseField(dataType = DataType.BYTE_ARRAY)
     private String image;
 
 
@@ -24,12 +27,8 @@ public class Drapeau {
 ####################################################################################################
 */
 
-
-
     public Drapeau() {
     }
-
-
 
 
     public Drapeau(String pays, String image) {
@@ -37,9 +36,13 @@ public class Drapeau {
         this.image = image;
     }
 
+    public Drapeau(String pays, String codePays, String image) {
+        this.pays = pays;
+        this.codePays = codePays;
+        this.image = image;
+    }
 
-
-/*
+    /*
 *###################################################################################################
 ####################################################################################################
 --------------------------------------------GUETTERS------------------------------------------------
@@ -57,9 +60,11 @@ public class Drapeau {
         return image;
     }
 
+    public String getCodePays() {
+        return codePays;
+    }
 
-
-/*
+    /*
 *###################################################################################################
 ####################################################################################################
 --------------------------------------------METHODES------------------------------------------------
@@ -72,12 +77,11 @@ public class Drapeau {
         this.pays = pays;
     }
 
-
-
     public void setImage(String image) {
         this.image = image;
     }
 
-
-
+    public void setCodePays(String codePays) {
+        this.codePays = codePays;
+    }
 }
