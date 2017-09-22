@@ -1,12 +1,13 @@
 package com.example.aller.drapeauapp;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
+
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
         private ProgressBar progressBar;
         private TextView textViewBdd;
@@ -34,10 +35,17 @@ public class MainActivity extends AppCompatActivity {
         private TextView textViewDate;
         private TextView textViewScore;
 
+        //Button
+        private Button buttonTest;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_main);
+
+            buttonTest=(Button)findViewById(R.id.buttonTest);
+            buttonTest.setOnClickListener(this);
+
 
 		Webservice webservice = new Webservice();
 		webservice.execute("http://www.geognos.com/api/en/countries/info/all.json");
@@ -69,7 +77,20 @@ public class MainActivity extends AppCompatActivity {
              */
         }
 
-	private class Webservice extends AsyncTask<String, String, List<Country>> {
+
+
+        @Override
+        public void onClick(View view) {
+            Intent intent= new Intent(MainActivity.this, FragmentsActivity.class);
+            startActivity(intent);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    private class Webservice extends AsyncTask<String, String, List<Country>> {
 
 		@Override
 		protected List<Country> doInBackground(String... params) {
