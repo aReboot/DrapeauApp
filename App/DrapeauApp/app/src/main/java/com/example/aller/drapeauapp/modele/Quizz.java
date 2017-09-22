@@ -7,8 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by aller on 19/09/2017.
  */
 
-    @DatabaseTable(tableName="quizz")
-
+@DatabaseTable(tableName="quizz")
 public class Quizz {
 
 

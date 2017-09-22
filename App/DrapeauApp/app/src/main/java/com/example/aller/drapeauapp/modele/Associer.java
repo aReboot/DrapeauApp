@@ -10,15 +10,16 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 
 @DatabaseTable(tableName = "associer")
-
 public class Associer {
 
+    @DatabaseField(id = true)
+    private String id_drapeau_quizz;
 
     @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, uniqueCombo = true)
-    Drapeau drapeaux;
+    private Drapeau drapeaux;
 
     @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, uniqueCombo = true)
-    Quizz quizzs;
+    private Quizz quizzs;
 
     @DatabaseField
     private int sens;
@@ -35,14 +36,16 @@ public class Associer {
 
 
 
-    public Associer() {
-    }
+    public Associer() {}
 
-    public Associer(Drapeau drapeaux, Quizz quizzs, int sens) {
-        this.drapeaux = drapeaux;
-        this.quizzs = quizzs;
+    public Associer(Drapeau drapeau, Quizz quizz, int sens){
+        this.id_drapeau_quizz = drapeau.getPays()+String.valueOf(quizz.getNumero())+String.valueOf(sens);
+        this.drapeaux = drapeau;
+        this.quizzs = quizz;
         this.sens = sens;
     }
+
+
 
     /*
 *###################################################################################################
@@ -66,6 +69,10 @@ public class Associer {
         return quizzs;
     }
 
+    public String getId_drapeau_quizz() {
+        return id_drapeau_quizz;
+    }
+
     /*
 *###################################################################################################
 ####################################################################################################
@@ -84,5 +91,9 @@ public class Associer {
 
     public void setSens(int sens) {
         this.sens = sens;
+    }
+
+    public void setId_drapeau_quizz(String id_drapeau_quizz) {
+        this.id_drapeau_quizz = id_drapeau_quizz;
     }
 }
