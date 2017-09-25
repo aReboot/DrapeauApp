@@ -112,4 +112,5 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 
 
 
+
 }//end.

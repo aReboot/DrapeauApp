@@ -172,7 +172,6 @@ public class FragmentsActivity extends AppCompatActivity implements
             /*
             On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
              */
-
     }
 
     public void resetProgressBar() {
