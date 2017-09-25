@@ -5,11 +5,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzImage;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzTexte;
 import com.example.aller.drapeauapp.thread.TimerHandler;
+import com.example.aller.drapeauapp.thread.TimerHandlerImplementation;
 
 
 import java.util.Random;
@@ -19,7 +21,7 @@ import java.util.Random;
  */
 
 public class FragmentsActivity extends AppCompatActivity implements
-                FragmentsQuizzImage.FragmentChanger,FragmentsQuizzTexte.FragmentChanger {
+                FragmentsQuizzImage.FragmentChanger,FragmentsQuizzTexte.FragmentChanger{
 
     //Random
     private Random randomGenerateur;
@@ -37,6 +39,12 @@ public class FragmentsActivity extends AppCompatActivity implements
     //FragmentTransaction
     private FragmentTransaction fragmentTransaction;
 
+    //ProgressBar
+    private ProgressBar progressBarQuizzTexte;
+    private ProgressBar progressBarQuizzImage;
+
+    //TimerHandler
+    private TimerHandler timerHandler;
 
 
 
@@ -57,6 +65,11 @@ public class FragmentsActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_fragments);
 
         ///////////////////////////////////////////////////////////////////////
+
+
+        //Thread
+        timerHandler = new TimerHandlerImplementation(this);
+
 
         //Random
         randomGenerateur=new Random();
@@ -159,10 +172,10 @@ public class FragmentsActivity extends AppCompatActivity implements
         randomInt=randomGenerateur.nextInt(2);
         Log.i("info","choix d'un numero aleatoire pour le remplacement du fragment"+String.valueOf(randomInt));
         if(randomInt==0){
-            Log.i("info", "changement de fragment par le fragment texte");
+            Log.i("info", "changement de fragment par le fragment image");
             remplacementDuFragmentTexte();
         }else{
-            Log.i("info","changement de fragment par le fragment image");
+            Log.i("info","changement de fragment par le fragment texte");
             remplacementDuFragmentImage();
         }
     }
@@ -172,12 +185,26 @@ public class FragmentsActivity extends AppCompatActivity implements
             /*
             On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
              */
+            if (fragmentsQuizzTexte != null && fragmentsQuizzTexte.isVisible()) {
+                progressBarQuizzTexte.incrementProgressBy(1);
+            }
+            if (fragmentsQuizzImage != null && fragmentsQuizzImage.isVisible()) {
+                progressBarQuizzImage.incrementProgressBy(1);
+            }
     }
 
     public void resetProgressBar() {
             /*
             On utilisera ici la méthode setProgressBar(0) sur la progressBar
              */
+        if (fragmentsQuizzTexte != null && fragmentsQuizzTexte.isVisible()) {
+            progressBarQuizzImage.setProgress(0);
+        }
+        if (fragmentsQuizzImage != null && fragmentsQuizzImage.isVisible()) {
+            progressBarQuizzTexte.setProgress(0);
+        }
     }
+
+
 
 }//end.

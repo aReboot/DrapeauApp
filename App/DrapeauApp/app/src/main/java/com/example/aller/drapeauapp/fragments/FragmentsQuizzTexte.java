@@ -12,14 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.aller.drapeauapp.R;
+import com.example.aller.drapeauapp.thread.TimerHandler;
+import com.example.aller.drapeauapp.thread.TimerHandlerImplementation;
 
 /**
  * Created by aller on 19/09/2017.
  */
 
 public class FragmentsQuizzTexte extends Fragment implements View.OnClickListener{
+
 
     //FramgmentActivity
     private FragmentActivity fragmentActivity;
@@ -33,11 +37,15 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
     private Button buttonQuizzTexteTrois;
     private Button buttonQuizzTexteQuatre;
 
-
+    //ProgressBar
+    private ProgressBar progressBarQuizzTexte;
 
 
     //Interface
     private FragmentChanger mFragmentChanger;
+
+
+
 
 /*
 *###################################################################################################
@@ -73,6 +81,10 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
         //imageView
         imageViewQuizzTexte=view.findViewById(R.id.imageViewQuizzTexteFragment);
+
+        //ProgressBar
+        progressBarQuizzTexte=view.findViewById(R.id.progressBarQuizzTexte);
+
 
         /////////////////////////////////////////////////////////////////////////////////////////
 
