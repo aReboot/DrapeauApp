@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.example.aller.drapeauapp.FragmentsActivity;
-import com.example.aller.drapeauapp.MainActivity;
 
 /**
  * Created by Adrien on 19/09/2017.
@@ -29,9 +28,10 @@ public class TimerHandlerImplementation extends Handler implements TimerHandler 
         super.handleMessage(msg);
         fragmentsActivity.incrementProgressBar();
         progress++;
-        if (progress >= 20) {
-            stopTimer();
+        if (progress >= 10) {
+            resetTimer();
             fragmentsActivity.resetProgressBar();
+            fragmentsActivity.remplacementDunFragmentUneFoisLeQuizzLance();
         }
     }
 
@@ -41,8 +41,7 @@ public class TimerHandlerImplementation extends Handler implements TimerHandler 
     }
 
     @Override
-    public void stopTimer() {
-        timerThread.stop();
+    public void resetTimer() {
         progress = 0;
     }
 

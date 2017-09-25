@@ -22,7 +22,7 @@ import com.example.aller.drapeauapp.thread.TimerHandlerImplementation;
  * Created by aller on 19/09/2017.
  */
 
-public class FragmentsQuizzTexte extends Fragment implements View.OnClickListener{
+public class FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBarProgression{
 
 
     //FramgmentActivity
@@ -96,8 +96,18 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
         return view;
     }
 
+    @Override
+    public void incrementProgressBar() {
+        progressBarQuizzTexte.incrementProgressBy(1);
+    }
 
-        /////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public void resetProgressBar() {
+        progressBarQuizzTexte.setProgress(0);
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////
 
 
 

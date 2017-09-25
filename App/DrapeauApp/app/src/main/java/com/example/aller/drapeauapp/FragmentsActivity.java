@@ -21,30 +21,26 @@ import java.util.Random;
  */
 
 public class FragmentsActivity extends AppCompatActivity implements
-                FragmentsQuizzImage.FragmentChanger,FragmentsQuizzTexte.FragmentChanger{
+		FragmentsQuizzImage.FragmentChanger, FragmentsQuizzTexte.FragmentChanger {
 
-    //Random
-    private Random randomGenerateur;
+	//Random
+	private Random randomGenerateur;
 
-    //Int
-    private int randomInt;
+	//Int
+	private int randomInt;
 
-    //Fragment
-    private FragmentsQuizzImage fragmentsQuizzImage;
-    private FragmentsQuizzTexte fragmentsQuizzTexte;
+	//Fragment
+	private FragmentsQuizzImage fragmentsQuizzImage;
+	private FragmentsQuizzTexte fragmentsQuizzTexte;
 
-    //Fragment Manager
-    private FragmentManager fragmentManager;
+	//Fragment Manager
+	private FragmentManager fragmentManager;
 
-    //FragmentTransaction
-    private FragmentTransaction fragmentTransaction;
+	//FragmentTransaction
+	private FragmentTransaction fragmentTransaction;
 
-    //ProgressBar
-    private ProgressBar progressBarQuizzTexte;
-    private ProgressBar progressBarQuizzImage;
-
-    //TimerHandler
-    private TimerHandler timerHandler;
+	//TimerHandler
+	private TimerHandler timerHandler;
 
 
 
@@ -57,154 +53,143 @@ public class FragmentsActivity extends AppCompatActivity implements
 */
 
 
+	//Redefintion de la methode OnCreate.
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_fragments);
 
-    //Redefintion de la methode OnCreate.
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragments);
-
-        ///////////////////////////////////////////////////////////////////////
-
-
-        //Thread
-        timerHandler = new TimerHandlerImplementation(this);
+		///////////////////////////////////////////////////////////////////////
 
 
-        //Random
-        randomGenerateur=new Random();
-
-        //Fragment
-        fragmentsQuizzImage=new FragmentsQuizzImage();
-        fragmentsQuizzTexte=new FragmentsQuizzTexte();
+		//Thread
+		timerHandler = new TimerHandlerImplementation(this);
 
 
-        //Application du fragment choisi au hasard a cette endroit
-        chargementDunFragmentEnAleatoireAuDebut();
+		//Random
+		randomGenerateur = new Random();
+
+		//Fragment
+		fragmentsQuizzImage = new FragmentsQuizzImage();
+		fragmentsQuizzTexte = new FragmentsQuizzTexte();
 
 
-    }
+		//Application du fragment choisi au hasard a cette endroit
+		chargementDunFragmentEnAleatoireAuDebut();
+	}
 
 
-            ////////////////////////////////////////////////////////////////////////
-                    //Systeme aleatoire des Fragments au lancement de la partie
-    
-    //Methode pour le debut de transaction pour eviter une repetition dans le code
-    public void debutDeTransaction(){
-        //on doit utiliser un fragment manager
-        fragmentManager=getSupportFragmentManager();
-        //qui va lancer la transaction
-        fragmentTransaction=fragmentManager.beginTransaction();
-    }
+	////////////////////////////////////////////////////////////////////////
+	//Systeme aleatoire des Fragments au lancement de la partie
+
+	//Methode pour le debut de transaction pour eviter une repetition dans le code
+	public void debutDeTransaction() {
+		//on doit utiliser un fragment manager
+		fragmentManager = getSupportFragmentManager();
+		//qui va lancer la transaction
+		fragmentTransaction = fragmentManager.beginTransaction();
+	}
 
 
+	//Methode pour charger le fragment QuizzTexte si celui est tire au hasard lord de la methode onCreate.
+	public void chargementFragmentQuizzTexte() {
 
-    //Methode pour charger le fragment QuizzTexte si celui est tire au hasard lord de la methode onCreate.
-    public void chargementFragmentQuizzTexte(){
-
-        //recupere les extras qui auraient ete eventuellement passés a l'activity
-        fragmentsQuizzTexte.setArguments(getIntent().getExtras());
-        //on doit utiliser un fragment manager
-        fragmentManager=getSupportFragmentManager();
-        //qui va lancer la transaction
-        fragmentTransaction=fragmentManager.beginTransaction();
-        //on demande une transaction au systeme Android
-        fragmentTransaction.add(R.id.relativeLayoutActivityFragment,fragmentsQuizzTexte);
-        //on commit la transaction
-        fragmentTransaction.commit();
-    }
-
-
-    //Methode pour charger le fragment QuizzImage si celui est tire au hasard lord de la methode onCreate.
-    public void chargementFragmentQuizzImage(){
-
-        //recupere les extras qui auraient ete eventuellement passés a l'activity
-        fragmentsQuizzImage.setArguments(getIntent().getExtras());
-        //on doit utiliser un fragment manager
-        fragmentManager=getSupportFragmentManager();
-        //qui va lancer la transaction
-        fragmentTransaction=fragmentManager.beginTransaction();
-        //on demande une transaction au systeme Android
-        fragmentTransaction.add(R.id.relativeLayoutActivityFragment,fragmentsQuizzImage);
-        //on commit la transaction
-        fragmentTransaction.commit();
-    }
+		//recupere les extras qui auraient ete eventuellement passés a l'activity
+		fragmentsQuizzTexte.setArguments(getIntent().getExtras());
+		//on doit utiliser un fragment manager
+		fragmentManager = getSupportFragmentManager();
+		//qui va lancer la transaction
+		fragmentTransaction = fragmentManager.beginTransaction();
+		//on demande une transaction au systeme Android
+		fragmentTransaction.add(R.id.relativeLayoutActivityFragment, fragmentsQuizzTexte);
+		//on commit la transaction
+		fragmentTransaction.commit();
+	}
 
 
+	//Methode pour charger le fragment QuizzImage si celui est tire au hasard lord de la methode onCreate.
+	public void chargementFragmentQuizzImage() {
 
-    //Methode pour le choix du fragment en aleatoire au debut.
-
-    public void chargementDunFragmentEnAleatoireAuDebut(){
-        randomInt=randomGenerateur.nextInt(2);
-        Log.i("info","Choix de la vue grace a la methode Random qui va tirer un numero aleatoire, numero:"+String.valueOf(randomInt));
-        if(randomInt==0){
-            chargementFragmentQuizzTexte();
-        }else{
-            chargementFragmentQuizzImage();
-        }
-    }
-
-            ///////////////////////////////////////////////////////////////////////////
-                //REMPLACEMENT DU FRAGMENT UNE FOIS LE QUIZZ LE LANCE
-
-
-    //Methode pour remplacer un fragment apres avoir repondu a une qestion ou que le temps est ecoulé
-
-    public void remplacementDuFragmentTexte(){
-        fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.relativeLayoutActivityFragment,fragmentsQuizzImage);
-        fragmentTransaction.addToBackStack("null");
-        fragmentTransaction.commit();
-    }
+		//recupere les extras qui auraient ete eventuellement passés a l'activity
+		fragmentsQuizzImage.setArguments(getIntent().getExtras());
+		//on doit utiliser un fragment manager
+		fragmentManager = getSupportFragmentManager();
+		//qui va lancer la transaction
+		fragmentTransaction = fragmentManager.beginTransaction();
+		//on demande une transaction au systeme Android
+		fragmentTransaction.add(R.id.relativeLayoutActivityFragment, fragmentsQuizzImage);
+		//on commit la transaction
+		fragmentTransaction.commit();
+	}
 
 
-    public void remplacementDuFragmentImage(){
-        fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.relativeLayoutActivityFragment,fragmentsQuizzTexte);
-        fragmentTransaction.addToBackStack("null");
-        fragmentTransaction.commit();
-    }
+	//Methode pour le choix du fragment en aleatoire au debut.
+
+	public void chargementDunFragmentEnAleatoireAuDebut() {
+		timerHandler.startTimer();
+		randomInt = randomGenerateur.nextInt(2);
+		Log.i("info", "Choix de la vue grace a la methode Random qui va tirer un numero aleatoire, numero:" + String.valueOf(randomInt));
+		if (randomInt == 0) {
+			chargementFragmentQuizzTexte();
+		} else {
+			chargementFragmentQuizzImage();
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+	//REMPLACEMENT DU FRAGMENT UNE FOIS LE QUIZZ LE LANCE
 
 
-    //Methode pour remplacer un fragment une fois le quizz lancé
-    @Override
-    public void remplacementDunFragmentUneFoisLeQuizzLance() {
-        randomInt=randomGenerateur.nextInt(2);
-        Log.i("info","choix d'un numero aleatoire pour le remplacement du fragment"+String.valueOf(randomInt));
-        if(randomInt==0){
-            Log.i("info", "changement de fragment par le fragment image");
-            remplacementDuFragmentTexte();
-        }else{
-            Log.i("info","changement de fragment par le fragment texte");
-            remplacementDuFragmentImage();
-        }
-    }
+	//Methode pour remplacer un fragment apres avoir repondu a une qestion ou que le temps est ecoulé
 
-    //Methode pour la progresse bar
-    public void incrementProgressBar() {
-            /*
-            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
-             */
-            if (fragmentsQuizzTexte != null && fragmentsQuizzTexte.isVisible()) {
-                progressBarQuizzTexte.incrementProgressBy(1);
-            }
-            if (fragmentsQuizzImage != null && fragmentsQuizzImage.isVisible()) {
-                progressBarQuizzImage.incrementProgressBy(1);
-            }
-    }
-
-    public void resetProgressBar() {
-            /*
-            On utilisera ici la méthode setProgressBar(0) sur la progressBar
-             */
-        if (fragmentsQuizzTexte != null && fragmentsQuizzTexte.isVisible()) {
-            progressBarQuizzImage.setProgress(0);
-        }
-        if (fragmentsQuizzImage != null && fragmentsQuizzImage.isVisible()) {
-            progressBarQuizzTexte.setProgress(0);
-        }
-    }
+	public void remplacementDuFragmentTexte() {
+		fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragmentsQuizzImage);
+		fragmentTransaction.addToBackStack("null");
+		fragmentTransaction.commit();
+	}
 
 
+	public void remplacementDuFragmentImage() {
+		fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragmentsQuizzTexte);
+		fragmentTransaction.addToBackStack("null");
+		fragmentTransaction.commit();
+	}
+
+
+	//Methode pour remplacer un fragment une fois le quizz lancé
+	@Override
+	public void remplacementDunFragmentUneFoisLeQuizzLance() {
+		timerHandler.startTimer();
+		randomInt = randomGenerateur.nextInt(2);
+		Log.i("info", "choix d'un numero aleatoire pour le remplacement du fragment" + String.valueOf(randomInt));
+		if (randomInt == 0) {
+			Log.i("info", "changement de fragment par le fragment image");
+			remplacementDuFragmentTexte();
+		} else {
+			Log.i("info", "changement de fragment par le fragment texte");
+			remplacementDuFragmentImage();
+		}
+	}
+
+	//Methode pour la progresse bar
+	public void incrementProgressBar() {
+		if (fragmentsQuizzTexte != null && fragmentsQuizzTexte.isVisible()) {
+			fragmentsQuizzTexte.incrementProgressBar();
+		}
+		if (fragmentsQuizzImage != null && fragmentsQuizzImage.isVisible()) {
+			fragmentsQuizzImage.incrementProgressBar();
+		}
+	}
+
+	public void resetProgressBar() {
+		if (fragmentsQuizzTexte != null && fragmentsQuizzTexte.isVisible()) {
+			fragmentsQuizzTexte.resetProgressBar();
+		}
+		if (fragmentsQuizzImage != null && fragmentsQuizzImage.isVisible()) {
+			fragmentsQuizzImage.resetProgressBar();
+		}
+	}
 
 }//end.

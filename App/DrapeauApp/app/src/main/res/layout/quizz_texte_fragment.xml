@@ -76,7 +76,8 @@
                 android:id="@+id/progressBarQuizzTexte"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:max="10"/>
         </LinearLayout>
 
         <LinearLayout
