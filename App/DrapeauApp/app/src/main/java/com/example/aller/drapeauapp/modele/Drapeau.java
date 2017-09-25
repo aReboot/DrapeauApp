@@ -15,8 +15,8 @@ public class Drapeau {
     @DatabaseField
     private String codePays;
 
-    @DatabaseField //@DatabaseField(dataType = DataType.BYTE_ARRAY)
-    private String image;
+    @DatabaseField//(dataType = DataType.BYTE_ARRAY)
+    private String repImage;
 
 
 /*
@@ -31,16 +31,15 @@ public class Drapeau {
     }
 
 
-    public Drapeau(String pays, String image) {
-        this.pays = pays;
-        this.image = image;
+
+    public Drapeau(String pays, String codePays, String repImage) {
+       this.pays = pays;
+        this.codePays = codePays;
+        this.repImage = repImage;
     }
 
-    public Drapeau(String pays, String codePays, String image) {
-        this.pays = pays;
-        this.codePays = codePays;
-        this.image = image;
-    }
+
+
 
     /*
 *###################################################################################################
@@ -56,9 +55,10 @@ public class Drapeau {
         return pays;
     }
 
-    public String getImage() {
-        return image;
-    }
+   public String getRepImage() {
+        return repImage;
+   }
+
 
     public String getCodePays() {
         return codePays;
@@ -67,7 +67,7 @@ public class Drapeau {
     /*
 *###################################################################################################
 ####################################################################################################
---------------------------------------------METHODES------------------------------------------------
+--------------------------------------------SETTERS------------------------------------------------
 ####################################################################################################
 ####################################################################################################
 */
@@ -77,8 +77,8 @@ public class Drapeau {
         this.pays = pays;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setRepImage(String repImage) {
+       this.repImage = repImage;
     }
 
     public void setCodePays(String codePays) {
