@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.modele.Resultat;
+import com.squareup.picasso.Picasso;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -34,6 +35,8 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        String urlImageForPicasso = "";
+
         Resultat resultat = getItem(position);
         Resources res = convertView.getResources();
 
@@ -50,11 +53,12 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
 
         DBConnection dbConnection = new DBConnection(getContext());
         try {
-            dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer());
+            urlImageForPicasso = dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        Picasso.with(getContext()).load(urlImageForPicasso).into(imageViewFlag);
         textViewCorrectAnswer.setText(resultat.getCorrectAnswer());
         textViewUserAnswer.setText(resultat.getUserAnswer());
 
