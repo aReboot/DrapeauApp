@@ -21,7 +21,7 @@ import java.sql.SQLException;
 
 public class DBConnection extends OrmLiteSqliteOpenHelper{
 
-    private static final String DATABASE_NAME = "Nationalquizz.db";
+    private static final String DATABASE_NAME = "DeltaQuizz.db";
 
     private static  final int DATABASE_VERSION = 1;
 
