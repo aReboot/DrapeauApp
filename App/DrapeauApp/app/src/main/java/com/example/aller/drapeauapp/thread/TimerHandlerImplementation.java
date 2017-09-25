@@ -16,6 +16,8 @@ public class TimerHandlerImplementation extends Handler implements TimerHandler 
     private TimerThread timerThread;
     private int progress;
 
+
+
     public TimerHandlerImplementation(FragmentsActivity fragmentsActivity) {
         this.fragmentsActivity = fragmentsActivity;
         timerThread = new TimerThreadImplementation(this);

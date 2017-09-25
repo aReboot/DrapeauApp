@@ -6,5 +6,10 @@
     <string name="quizz">quizz</string>
     <string name="Drapeau">Drapeau</string>
     <string name="drapeau">drapeau</string>
+    <string name="Commencer">Commencer</string>
+    <string name="Quitter">Quitter</string>
+    <string name="Menu">Menu</string>
+    <string name="Recommencer">Recommencer</string>
+
 
 </resources>
