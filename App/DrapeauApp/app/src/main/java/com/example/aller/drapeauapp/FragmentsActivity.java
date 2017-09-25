@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzImage;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzTexte;
+import com.example.aller.drapeauapp.thread.TimerHandler;
 
 
 import java.util.Random;
@@ -17,7 +18,8 @@ import java.util.Random;
  * Created by aller on 19/09/2017.
  */
 
-public class FragmentsActivity extends AppCompatActivity implements FragmentsQuizzImage.FragmentChanger,FragmentsQuizzTexte.FragmentChanger{
+public class FragmentsActivity extends AppCompatActivity implements
+                FragmentsQuizzImage.FragmentChanger,FragmentsQuizzTexte.FragmentChanger {
 
     //Random
     private Random randomGenerateur;
@@ -165,6 +167,18 @@ public class FragmentsActivity extends AppCompatActivity implements FragmentsQui
         }
     }
 
+    //Methode pour la progresse bar
+    public void incrementProgressBar() {
+            /*
+            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
+             */
 
+    }
+
+    public void resetProgressBar() {
+            /*
+            On utilisera ici la méthode setProgressBar(0) sur la progressBar
+             */
+    }
 
 }//end.

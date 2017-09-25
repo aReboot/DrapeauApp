@@ -3,6 +3,7 @@ package com.example.aller.drapeauapp.thread;
 import android.os.Handler;
 import android.os.Message;
 
+import com.example.aller.drapeauapp.FragmentsActivity;
 import com.example.aller.drapeauapp.MainActivity;
 
 /**
@@ -11,12 +12,12 @@ import com.example.aller.drapeauapp.MainActivity;
 
 public class TimerHandlerImplementation extends Handler implements TimerHandler {
 
-    private MainActivity mainActivity;
+    private FragmentsActivity fragmentsActivity;
     private TimerThread timerThread;
     private int progress;
 
-    public TimerHandlerImplementation(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
+    public TimerHandlerImplementation(FragmentsActivity fragmentsActivity) {
+        this.fragmentsActivity = fragmentsActivity;
         timerThread = new TimerThreadImplementation(this);
         progress = 0;
     }
@@ -24,11 +25,11 @@ public class TimerHandlerImplementation extends Handler implements TimerHandler 
     @Override
     public void handleMessage(Message msg) {
         super.handleMessage(msg);
-        mainActivity.incrementProgressBar();
+        fragmentsActivity.incrementProgressBar();
         progress++;
         if (progress >= 20) {
             stopTimer();
-            mainActivity.resetProgressBar();
+            fragmentsActivity.resetProgressBar();
         }
     }
 

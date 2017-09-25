@@ -98,26 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-
 	}
-
-	    /////////////////////////////////////////////////////////////////////////////////
-
-    //Methode pour la progresse bar
-    public void incrementProgressBar() {
-            /*
-            On utilisera ici la méthode incrementProgressBy(1) sur la progressBar
-             */
-    }
-
-    public void resetProgressBar() {
-            /*
-            On utilisera ici la méthode setProgressBar(0) sur la progressBar
-             */
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////
 
     //Redefinition de la methode onClick pour les action des buttons.
         @Override
