@@ -54,6 +54,7 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         textViewCorrectAnswer.setText(resultat.getCorrectAnswer());
         textViewUserAnswer.setText(resultat.getUserAnswer());
 

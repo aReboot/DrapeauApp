@@ -23,17 +23,23 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="9150e288-9e09-4ab3-9de7-1be4c8daf4c5">
+        <schema name="main" object-types="column, constraint, index, table, dataset trigger, view" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="5e3107e8-4337-48e9-aa3e-521321fef9c7">
+    <connection id="9150e288-9e09-4ab3-9de7-1be4c8daf4c5">
       <console name="Connection" type="STANDARD" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-list connection-id="5e3107e8-4337-48e9-aa3e-521321fef9c7" dataset="main.quizz" active-filter-id="EMPTY_FILTER" />
-    <filter-list connection-id="5e3107e8-4337-48e9-aa3e-521321fef9c7" dataset="main.drapeau" active-filter-id="EMPTY_FILTER" />
-    <filter-list connection-id="5e3107e8-4337-48e9-aa3e-521321fef9c7" dataset="main.associer" active-filter-id="EMPTY_FILTER" />
+    <filter-list connection-id="9150e288-9e09-4ab3-9de7-1be4c8daf4c5" dataset="main.drapeau" active-filter-id="EMPTY_FILTER">
+      <filter id="6b55967d-c71f-408f-aa19-e68b713cdae2" name="France" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="pays" operator="=" value="France" active="true" />
+      </filter>
+    </filter-list>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -58,7 +64,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="5e3107e8-4337-48e9-aa3e-521321fef9c7" active="true">
+      <connection id="9150e288-9e09-4ab3-9de7-1be4c8daf4c5" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -73,7 +79,7 @@
           <port value="" />
           <database value="" />
           <files>
-            <file path="C:\Users\user\Desktop\hellboy.db" schema="main" />
+            <file path="C:\Users\user\Desktop\DeltaQuizz.db" schema="main" />
           </files>
           <os-authentication value="false" />
           <empty-password value="false" />
@@ -247,7 +253,7 @@
         <data-length-threshold value="250" />
       </values-list-popup>
       <general>
-        <fetch-block-size value="100" />
+        <fetch-block-size value="300" />
         <fetch-timeout value="30" />
         <trim-whitespaces value="true" />
         <convert-empty-strings-to-null value="true" />

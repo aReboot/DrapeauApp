@@ -16,7 +16,7 @@ public class Drapeau {
     private String codePays;
 
     @DatabaseField//(dataType = DataType.BYTE_ARRAY)
-    private String repImage;
+    private String urlImage;
 
 
 /*
@@ -32,10 +32,10 @@ public class Drapeau {
 
 
 
-    public Drapeau(String pays, String codePays, String repImage) {
+    public Drapeau(String pays, String codePays, String urlImage) {
        this.pays = pays;
         this.codePays = codePays;
-        this.repImage = repImage;
+        this.urlImage = urlImage;
     }
 
 
@@ -55,8 +55,8 @@ public class Drapeau {
         return pays;
     }
 
-   public String getRepImage() {
-        return repImage;
+   public String getUrlImage() {
+        return urlImage;
    }
 
 
@@ -77,8 +77,8 @@ public class Drapeau {
         this.pays = pays;
     }
 
-    public void setRepImage(String repImage) {
-       this.repImage = repImage;
+    public void setUrlImage(String urlImage) {
+       this.urlImage = urlImage;
     }
 
     public void setCodePays(String codePays) {
