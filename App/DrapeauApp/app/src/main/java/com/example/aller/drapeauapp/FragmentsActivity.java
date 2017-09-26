@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
-
+import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzImage;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzTexte;
 import com.example.aller.drapeauapp.thread.TimerHandler;
@@ -42,8 +42,6 @@ public class FragmentsActivity extends AppCompatActivity implements
 	//TimerHandler
 	private TimerHandler timerHandler;
 
-
-
 /*
 *###################################################################################################
 ####################################################################################################
@@ -72,7 +70,6 @@ public class FragmentsActivity extends AppCompatActivity implements
 		//Fragment
 		fragmentsQuizzImage = new FragmentsQuizzImage();
 		fragmentsQuizzTexte = new FragmentsQuizzTexte();
-
 
 		//Application du fragment choisi au hasard a cette endroit
 		chargementDunFragmentEnAleatoireAuDebut();
@@ -145,15 +142,12 @@ public class FragmentsActivity extends AppCompatActivity implements
 	public void remplacementDuFragmentTexte() {
 		fragmentTransaction = getSupportFragmentManager().beginTransaction();
 		fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragmentsQuizzImage);
-		fragmentTransaction.addToBackStack("null");
 		fragmentTransaction.commit();
 	}
-
 
 	public void remplacementDuFragmentImage() {
 		fragmentTransaction = getSupportFragmentManager().beginTransaction();
 		fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragmentsQuizzTexte);
-		fragmentTransaction.addToBackStack("null");
 		fragmentTransaction.commit();
 	}
 
@@ -162,9 +156,8 @@ public class FragmentsActivity extends AppCompatActivity implements
 	@Override
 	public void remplacementDunFragmentUneFoisLeQuizzLance() {
 		timerHandler.startTimer();
-		randomInt = randomGenerateur.nextInt(2);
 		Log.i("info", "choix d'un numero aleatoire pour le remplacement du fragment" + String.valueOf(randomInt));
-		if (randomInt == 0) {
+		if (fragmentsQuizzTexte.isVisible()) {
 			Log.i("info", "changement de fragment par le fragment image");
 			remplacementDuFragmentTexte();
 		} else {
@@ -173,7 +166,9 @@ public class FragmentsActivity extends AppCompatActivity implements
 		}
 	}
 
-	//Methode pour la progresse bar
+	/*
+	Progress Bar
+	 */
 	public void incrementProgressBar() {
 		if (fragmentsQuizzTexte != null && fragmentsQuizzTexte.isVisible()) {
 			fragmentsQuizzTexte.incrementProgressBar();
