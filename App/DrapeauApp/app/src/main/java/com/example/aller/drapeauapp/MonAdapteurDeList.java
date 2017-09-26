@@ -30,7 +30,7 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
     DBConnection dbConnection = new DBConnection(getContext());
 
 
-    /* MyViewHolder va nous permettre de ne pas devoir rechercher
+    /*ViewHolder va nous permettre de ne pas devoir rechercher
     les vues à chaque appel de getView, nous gagnons ainsi en performance*/
     private  class ResusltatViewHolder{
         public ImageView imageViewFlag;
@@ -38,11 +38,24 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
         public TextView textViewUserAnswer;
     }
 
-
+/*
+*###################################################################################################
+####################################################################################################
+--------------------------------------------CONSTRUCTEUR--------------------------------------------
+####################################################################################################
+####################################################################################################
+*/
     public MonAdapteurDeList(Context context, List<Resultat> resultat) {
         super(context, 0, resultat);
     }
 
+    /*
+*###################################################################################################
+####################################################################################################
+--------------------------------------------METHODES------------------------------------------------
+####################################################################################################
+####################################################################################################
+*/
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -76,17 +89,22 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
         try {
             Log.i("MODELE"," resultat correct answer renvoie "+resultat.getCorrectAnswer());
             Log.i("DAO", " test sur le dao "+dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage());
+
             //on récupère l'url correspondant aux pays de la bonne réponse
             urlImageForPicasso = dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         Log.i("IMAGE","Tu me renvoie quoi ? "+Picasso.with(getContext()).load(urlImageForPicasso).toString());
+
         //la librairie picasso nous met la bonne image correspondant à la bonne réponse
         Picasso.with(getContext()).load(urlImageForPicasso).into(viewHolder.imageViewFlag);
+
         //on écrit la bonne réponse dans le champs textViewCorrectAnswer
         viewHolder.textViewCorrectAnswer.setText(resultat.getCorrectAnswer());
+
         //on écrit la réponse de l'utilisateur dans textViewUserAnswer
         viewHolder.textViewUserAnswer.setText(resultat.getUserAnswer());
 
