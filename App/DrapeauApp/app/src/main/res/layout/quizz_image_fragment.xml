@@ -86,8 +86,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutQuizzImageTrois"
-            android:layout_width="0dp"
-            android:layout_height="227dp"
+            android:layout_width="336dp"
+            android:layout_height="193dp"
             android:layout_marginEnd="22dp"
             android:layout_marginStart="22dp"
             android:layout_marginTop="10dp"
@@ -97,15 +97,18 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutQuizzImageDeux"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1">
+            tools:layout_constraintTop_creator="1"
+            tools:layout_editor_absoluteX="21dp">
 
             <ProgressBar
                 android:id="@+id/progressBarQuizzImage"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="42dp"
+                android:layout_height="61dp"
                 android:layout_weight="1"
-                android:max="10" />
+                android:max="10"
+                android:maxHeight="20dp"
+                android:minHeight="179dp" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

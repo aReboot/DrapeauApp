@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.aller.drapeauapp.R;
-import com.example.aller.drapeauapp.thread.TimerHandler;
-import com.example.aller.drapeauapp.thread.TimerHandlerImplementation;
+
 
 
 /**
@@ -85,7 +84,7 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
         progressBarQuizzImage=view.findViewById(R.id.progressBarQuizzImage);
              //Definition de la couleur de la ProgressBar
              Drawable drawable=progressBarQuizzImage.getProgressDrawable();
-             drawable.setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+             drawable.setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
              progressBarQuizzImage.setProgressDrawable(drawable);
 
 
