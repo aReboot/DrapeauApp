@@ -6,6 +6,9 @@ package com.example.aller.drapeauapp.thread;
 
 public interface TimerHandler {
 
-    public void startTimer();
-    public void resetTimer();
+	public void startTimer();
+
+	public void resetTimer();
+
+	public void stopTimer();
 }

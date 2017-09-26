@@ -11,38 +11,42 @@ import com.example.aller.drapeauapp.FragmentsActivity;
 
 public class TimerHandlerImplementation extends Handler implements TimerHandler {
 
-    private FragmentsActivity fragmentsActivity;
-    private TimerThread timerThread;
-    private int progress;
+	private FragmentsActivity fragmentsActivity;
+	private TimerThread timerThread;
+	private int progress;
 
 
+	public TimerHandlerImplementation(FragmentsActivity fragmentsActivity) {
+		this.fragmentsActivity = fragmentsActivity;
+		timerThread = new TimerThreadImplementation(this);
+		progress = 0;
+	}
 
-    public TimerHandlerImplementation(FragmentsActivity fragmentsActivity) {
-        this.fragmentsActivity = fragmentsActivity;
-        timerThread = new TimerThreadImplementation(this);
-        progress = 0;
-    }
+	@Override
+	public void handleMessage(Message msg) {
+		super.handleMessage(msg);
+		fragmentsActivity.incrementProgressBar();
+		progress++;
+		if (progress >= 10) {
+			resetTimer();
+			fragmentsActivity.resetProgressBar();
+			fragmentsActivity.remplacementDunFragmentUneFoisLeQuizzLance();
+		}
+	}
 
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        fragmentsActivity.incrementProgressBar();
-        progress++;
-        if (progress >= 10) {
-            resetTimer();
-            fragmentsActivity.resetProgressBar();
-            fragmentsActivity.remplacementDunFragmentUneFoisLeQuizzLance();
-        }
-    }
+	@Override
+	public void startTimer() {
+		timerThread.start();
+	}
 
-    @Override
-    public void startTimer() {
-        timerThread.start();
-    }
+	@Override
+	public void resetTimer() {
+		progress = 0;
+	}
 
-    @Override
-    public void resetTimer() {
-        progress = 0;
-    }
+	@Override
+	public void stopTimer() {
+		timerThread.stop();
+	}
 
 }
