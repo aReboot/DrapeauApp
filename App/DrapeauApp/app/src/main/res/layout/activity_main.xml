@@ -63,12 +63,6 @@
                 android:layout_height="wrap_content"
                 android:text="Quitter" />
 
-            <Button
-                android:id="@+id/buttonPageResultat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 

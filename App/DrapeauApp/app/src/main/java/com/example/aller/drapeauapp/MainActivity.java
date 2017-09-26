@@ -1,41 +1,31 @@
 package com.example.aller.drapeauapp;
 
 import android.content.Intent;
-
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.modele.Country;
 import com.example.aller.drapeauapp.modele.Drapeau;
-import com.example.aller.drapeauapp.modele.Resultat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.picasso.Picasso;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-//import org.apache.http.util.ByteArrayBuffer;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,9 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Button
     private Button buttonCommencer;
     private Button buttonQuitter;
-    private Button buttonTestList;
-
-    private Bitmap bitmap;
 
 
 /*
@@ -62,9 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //List<Resultat> resultatList = new ArrayList<>();
-
-
         //Buttons
         buttonCommencer = (Button) findViewById(R.id.buttonCommencerMainActivity);
         buttonCommencer.setOnClickListener(this);
@@ -72,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonQuitter = (Button) findViewById(R.id.buttonQuitterMainActivity);
         buttonQuitter.setOnClickListener(this);
 
-        buttonTestList = (Button)findViewById(R.id.buttonPageResultat);
-        buttonTestList.setOnClickListener(this);
 
         DBConnection connection = new DBConnection(this);
 
@@ -110,11 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.buttonCommencerMainActivity) {
             Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
             startActivity(intent);
-        } else if(view.getId() == R.id.buttonPageResultat){
-            Intent intent = new Intent(MainActivity.this, ResultatActivity.class);
-            startActivity(intent);
-        }
-        else {
+        }else {
             System.exit(0);
         }
 
