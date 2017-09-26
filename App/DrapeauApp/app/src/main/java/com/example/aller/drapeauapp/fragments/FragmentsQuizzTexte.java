@@ -3,9 +3,6 @@ package com.example.aller.drapeauapp.fragments;
 
 import android.content.Context;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -87,10 +84,6 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
         //ProgressBar
         progressBarQuizzTexte=view.findViewById(R.id.progressBarQuizzTexte);
-//        //Definition de la couleur de la ProgressBar
-//        Drawable drawable=progressBarQuizzTexte.getProgressDrawable();
-//        drawable.setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
-//        progressBarQuizzTexte.setProgressDrawable(drawable);
 
         /////////////////////////////////////////////////////////////////////////////////////////
 
