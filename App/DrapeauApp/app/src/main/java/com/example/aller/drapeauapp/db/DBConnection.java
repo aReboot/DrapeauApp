@@ -76,6 +76,7 @@ public class DBConnection extends OrmLiteSqliteOpenHelper{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Log.i("DATABASE","onUpgrade invoked");
     }
 
     public Dao<Drapeau, String> getDaoDrapeau() throws SQLException{
