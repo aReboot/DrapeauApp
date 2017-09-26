@@ -46,7 +46,9 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_resultat);
 
         resultatList = new ArrayList<>();
-
+        resultatList.add(new Resultat("France", "Pays-Bas"));
+        resultatList.add(new Resultat("Italy", ""));
+        resultatList.add(new Resultat("Portugal","Nope"));
 
         //Button
         buttonRecommencer=(Button)findViewById(R.id.buttonRecommencer);

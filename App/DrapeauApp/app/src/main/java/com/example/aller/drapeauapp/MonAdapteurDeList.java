@@ -1,8 +1,10 @@
 package com.example.aller.drapeauapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +23,17 @@ import java.util.List;
  * Created by user on 22/09/2017.
  */
 
+
 public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
 
-    private ImageView imageViewFlag;
-    private TextView textViewCorrectAnswer;
-    private TextView textViewUserAnswer;
+
+    DBConnection dbConnection = new DBConnection(getContext());
+
+    private  class ResusltatViewHolder{
+        public ImageView imageViewFlag;
+        public TextView textViewCorrectAnswer;
+        public TextView textViewUserAnswer;
+    }
 
 
     public MonAdapteurDeList(Context context, List<Resultat> resultat) {
@@ -36,31 +44,38 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         String urlImageForPicasso = "";
+        ResusltatViewHolder viewHolder = null;
 
         Resultat resultat = getItem(position);
-        Resources res = convertView.getResources();
+        //Resources res = convertView.getResources();
 
-        imageViewFlag = convertView.findViewById(R.id.imageViewFlag);
-        textViewCorrectAnswer = convertView.findViewById(R.id.textViewCorrectAnswer);
-        textViewUserAnswer = convertView.findViewById(R.id.textViewReponseUser);
+        if (convertView == null) {
+            LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+
+            convertView = mInflater.inflate(R.layout.row_list_results, parent, false);
+            viewHolder = new ResusltatViewHolder();
+            viewHolder.imageViewFlag = convertView.findViewById(R.id.imageViewFlag) ;
+            viewHolder.textViewCorrectAnswer = convertView.findViewById(R.id.textViewCorrectAnswer);
+            viewHolder.textViewUserAnswer = convertView.findViewById(R.id.textViewReponseUser);
+
+        }else{
+            viewHolder = (ResusltatViewHolder)convertView.getTag();
+        }
 
 
-        LayoutInflater inflater = (LayoutInflater)
-                getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (convertView != null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_list_results, parent, false);
-
-        DBConnection dbConnection = new DBConnection(getContext());
         try {
+            Log.i("MODELE"," resultat correct answer renvoie "+resultat.getCorrectAnswer());
+            Log.i("DAO", " test sur le dao "+dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage());
             urlImageForPicasso = dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        Picasso.with(getContext()).load(urlImageForPicasso).into(imageViewFlag);
-        textViewCorrectAnswer.setText(resultat.getCorrectAnswer());
-        textViewUserAnswer.setText(resultat.getUserAnswer());
+        Log.i("IMAGE","Tu me renvoie quoi ? "+Picasso.with(getContext()).load(urlImageForPicasso).toString());
+        Picasso.with(getContext()).load(urlImageForPicasso).into(viewHolder.imageViewFlag);
+        viewHolder.textViewCorrectAnswer.setText(resultat.getCorrectAnswer());
+        viewHolder.textViewUserAnswer.setText(resultat.getUserAnswer());
 
 
         return convertView;

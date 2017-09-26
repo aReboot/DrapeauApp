@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.modele.Country;
 import com.example.aller.drapeauapp.modele.Drapeau;
+import com.example.aller.drapeauapp.modele.Resultat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.squareup.picasso.Picasso;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Button
     private Button buttonCommencer;
     private Button buttonQuitter;
+    private Button buttonTestList;
 
     private Bitmap bitmap;
 
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //List<Resultat> resultatList = new ArrayList<>();
+
 
         //Buttons
         buttonCommencer = (Button) findViewById(R.id.buttonCommencerMainActivity);
@@ -67,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         buttonQuitter = (Button) findViewById(R.id.buttonQuitterMainActivity);
         buttonQuitter.setOnClickListener(this);
+
+        buttonTestList = (Button)findViewById(R.id.buttonPageResultat);
+        buttonTestList.setOnClickListener(this);
 
         DBConnection connection = new DBConnection(this);
 
@@ -103,7 +110,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.buttonCommencerMainActivity) {
             Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
             startActivity(intent);
-        } else {
+        } else if(view.getId() == R.id.buttonPageResultat){
+            Intent intent = new Intent(MainActivity.this, ResultatActivity.class);
+            startActivity(intent);
+        }
+        else {
             System.exit(0);
         }
 
