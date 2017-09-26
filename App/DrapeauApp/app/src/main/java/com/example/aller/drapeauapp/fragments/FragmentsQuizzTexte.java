@@ -2,6 +2,9 @@ package com.example.aller.drapeauapp.fragments;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,8 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.aller.drapeauapp.R;
-import com.example.aller.drapeauapp.thread.TimerHandler;
-import com.example.aller.drapeauapp.thread.TimerHandlerImplementation;
+
 
 /**
  * Created by aller on 19/09/2017.
@@ -84,7 +86,10 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
         //ProgressBar
         progressBarQuizzTexte=view.findViewById(R.id.progressBarQuizzTexte);
-
+            //Definition de la couleur de la ProgressBar
+            Drawable drawable=progressBarQuizzTexte.getProgressDrawable();
+            drawable.setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+            progressBarQuizzTexte.setProgressDrawable(drawable);
 
         /////////////////////////////////////////////////////////////////////////////////////////
 
