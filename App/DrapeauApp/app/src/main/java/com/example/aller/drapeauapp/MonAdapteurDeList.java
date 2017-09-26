@@ -29,6 +29,9 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
 
     DBConnection dbConnection = new DBConnection(getContext());
 
+
+    /* MyViewHolder va nous permettre de ne pas devoir rechercher
+    les vues à chaque appel de getView, nous gagnons ainsi en performance*/
     private  class ResusltatViewHolder{
         public ImageView imageViewFlag;
         public TextView textViewCorrectAnswer;
@@ -46,19 +49,25 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
         String urlImageForPicasso = "";
         ResusltatViewHolder viewHolder = null;
 
+        // nous récupérons l'item de la liste demandé par getView
         Resultat resultat = getItem(position);
-        //Resources res = convertView.getResources();
 
+
+        // au premier appel ConvertView est null, on inflate notre layout
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
             convertView = mInflater.inflate(R.layout.row_list_results, parent, false);
+
+            // nous plaçons dans notre ViewHolder les vues de notre layout
             viewHolder = new ResusltatViewHolder();
             viewHolder.imageViewFlag = convertView.findViewById(R.id.imageViewFlag) ;
             viewHolder.textViewCorrectAnswer = convertView.findViewById(R.id.textViewCorrectAnswer);
             viewHolder.textViewUserAnswer = convertView.findViewById(R.id.textViewReponseUser);
 
         }else{
+            /*convertView n'est pas null, nous récupérons notre objet ViewHolder
+            et évitons ainsi de devoir retrouver les vues à chaque appel de getView*/
             viewHolder = (ResusltatViewHolder)convertView.getTag();
         }
 
@@ -67,14 +76,18 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
         try {
             Log.i("MODELE"," resultat correct answer renvoie "+resultat.getCorrectAnswer());
             Log.i("DAO", " test sur le dao "+dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage());
+            //on récupère l'url correspondant aux pays de la bonne réponse
             urlImageForPicasso = dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         Log.i("IMAGE","Tu me renvoie quoi ? "+Picasso.with(getContext()).load(urlImageForPicasso).toString());
+        //la librairie picasso nous met la bonne image correspondant à la bonne réponse
         Picasso.with(getContext()).load(urlImageForPicasso).into(viewHolder.imageViewFlag);
+        //on écrit la bonne réponse dans le champs textViewCorrectAnswer
         viewHolder.textViewCorrectAnswer.setText(resultat.getCorrectAnswer());
+        //on écrit la réponse de l'utilisateur dans textViewUserAnswer
         viewHolder.textViewUserAnswer.setText(resultat.getUserAnswer());
 
 
