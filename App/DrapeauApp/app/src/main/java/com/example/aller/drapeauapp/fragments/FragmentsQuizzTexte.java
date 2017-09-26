@@ -87,10 +87,10 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
         //ProgressBar
         progressBarQuizzTexte=view.findViewById(R.id.progressBarQuizzTexte);
-        //Definition de la couleur de la ProgressBar
-        Drawable drawable=progressBarQuizzTexte.getProgressDrawable();
-        drawable.setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
-        progressBarQuizzTexte.setProgressDrawable(drawable);
+//        //Definition de la couleur de la ProgressBar
+//        Drawable drawable=progressBarQuizzTexte.getProgressDrawable();
+//        drawable.setColorFilter(Color.BLUE, PorterDuff.Mode.MULTIPLY);
+//        progressBarQuizzTexte.setProgressDrawable(drawable);
 
         /////////////////////////////////////////////////////////////////////////////////////////
 
