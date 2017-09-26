@@ -17,31 +17,42 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.aller.drapeauapp.R;
+import com.example.aller.drapeauapp.db.DBConnection;
+import com.example.aller.drapeauapp.modele.Drapeau;
+import com.example.aller.drapeauapp.modele.RandomFlag;
+import com.squareup.picasso.Picasso;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * Created by aller on 19/09/2017.
  */
 
-public class FragmentsQuizzImage extends Fragment implements View.OnClickListener, ProgressBarProgression {
+public class FragmentsQuizzImage extends Fragment implements View.OnClickListener,
+		ProgressBarProgression, generateQuizz {
 
 
-    //TextView
-    private TextView texteViewQuizzImage;
+	//TextView
+	private TextView texteViewQuizzImage;
 
-    //ImageButton
-    private ImageButton imageButtonQuizzImageUn;
-    private ImageButton imageButtonQuizzImageDeux;
-    private ImageButton imageButtonQuizzImageTrois;
-    private ImageButton imageButtonQuizzImageQuatre;
+	//ImageButton
+	private ImageButton imageButtonQuizzImageUn;
+	private ImageButton imageButtonQuizzImageDeux;
+	private ImageButton imageButtonQuizzImageTrois;
+	private ImageButton imageButtonQuizzImageQuatre;
 
 
-    //ProgressBar
-    private ProgressBar progressBarQuizzImage;
+	//ProgressBar
+	private ProgressBar progressBarQuizzImage;
 
-    //Interface
-    private FragmentChanger mFragmentChanger;
+	//Interface
+	private FragmentChanger mFragmentChanger;
+
+	// database
+	private DBConnection dbConnection = null;
 
 
 
@@ -54,91 +65,118 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 */
 
 
+	//redefinition de la methode onCreate View
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    //redefinition de la methode onCreate View
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.quizz_image_fragment, container, false);
 
-        View view = inflater.inflate(R.layout.quizz_image_fragment, container, false);
+		////////////////////////////////////////////////////////////////////////////////////
+		//TexteView
+		texteViewQuizzImage = view.findViewById(R.id.textViewQuizzImageFragment);
 
-        ////////////////////////////////////////////////////////////////////////////////////
-        //TexteView
-        texteViewQuizzImage=view.findViewById(R.id.textViewQuizzImageFragment);
+		//ImageButton
+		imageButtonQuizzImageUn = view.findViewById(R.id.imageButtonQuizzImageUne);
+		imageButtonQuizzImageUn.setOnClickListener(this);
 
-        //ImageButton
-        imageButtonQuizzImageUn=view.findViewById(R.id.imageButtonQuizzImageUne);
-        imageButtonQuizzImageUn.setOnClickListener(this);
+		imageButtonQuizzImageDeux = view.findViewById(R.id.imageButtonQuizzImageDeux);
+		imageButtonQuizzImageDeux.setOnClickListener(this);
 
-        imageButtonQuizzImageDeux=view.findViewById(R.id.imageButtonQuizzImageDeux);
-        imageButtonQuizzImageDeux.setOnClickListener(this);
+		imageButtonQuizzImageTrois = view.findViewById(R.id.imageButtonQuizzImageTrois);
+		imageButtonQuizzImageTrois.setOnClickListener(this);
 
-        imageButtonQuizzImageTrois=view.findViewById(R.id.imageButtonQuizzImageTrois);
-        imageButtonQuizzImageTrois.setOnClickListener(this);
-
-        imageButtonQuizzImageQuatre=view.findViewById(R.id.imageButtonQuizzImageQuatre);
-        imageButtonQuizzImageQuatre.setOnClickListener(this);
-
-
-        //ProgressBar
-        progressBarQuizzImage=view.findViewById(R.id.progressBarQuizzImage);
-             //Definition de la couleur de la ProgressBar
-             Drawable drawable=progressBarQuizzImage.getProgressDrawable();
-             drawable.setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
-             progressBarQuizzImage.setProgressDrawable(drawable);
+		imageButtonQuizzImageQuatre = view.findViewById(R.id.imageButtonQuizzImageQuatre);
+		imageButtonQuizzImageQuatre.setOnClickListener(this);
 
 
-        //////////////////////////////////////////////////////////////////////////////////////
+		//ProgressBar
+		progressBarQuizzImage = view.findViewById(R.id.progressBarQuizzImage);
+		//Definition de la couleur de la ProgressBar
+		Drawable drawable = progressBarQuizzImage.getProgressDrawable();
+		drawable.setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
+		progressBarQuizzImage.setProgressDrawable(drawable);
 
 
-        //On retourne la vue
-        return view;
-    }
+		//////////////////////////////////////////////////////////////////////////////////////
 
-    @Override
-    public void incrementProgressBar() {
-        progressBarQuizzImage.incrementProgressBy(1);
-    }
+		//On retourne la vue
+		return view;
+	}
 
-    @Override
-    public void resetProgressBar() {
-        progressBarQuizzImage.setProgress(0);
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    //Interface pour le changement de fragment
-    public interface FragmentChanger {
-        public void remplacementDunFragmentUneFoisLeQuizzLance();
-    }
+	@Override
+	public void onStart() {
+		super.onStart();
+		generateRandomQuizz();
+	}
 
 
-    //redefintion de la methode onAttach pour le changement de fragment
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try{
-            mFragmentChanger = (FragmentChanger) context;
-        }catch(ClassCastException e){
-            throw new ClassCastException(context.toString() + " erreur On Attach");
-        }
-    }
+	/*
+		Progress Bar
+		*/
+	@Override
+	public void incrementProgressBar() {
+		progressBarQuizzImage.incrementProgressBy(1);
+	}
+
+	@Override
+	public void resetProgressBar() {
+		progressBarQuizzImage.setProgress(0);
+	}
+
+	/*
+	GenerateQuizz
+	 */
+	@Override
+	public void generateRandomQuizz() {
+		try {
+			dbConnection = new DBConnection(getContext());
+			RandomFlag randomFlag = new RandomFlag();
+			List<Integer> integers = new ArrayList<>();
+			int min = 1;
+			int max = dbConnection.getDaoDrapeau().queryForAll().size();
+			integers = randomFlag.generateRandomIntList(min, max, 4);
+			List<Drapeau> drapeauList = new ArrayList<>();
+			for (Integer i:
+			     integers) {
+				drapeauList.add(dbConnection.getDaoDrapeau().queryForAll().get(i));
+			}
+			Picasso.with(getContext()).load(drapeauList.get(0).getUrlImage()).into(imageButtonQuizzImageUn);
+			Picasso.with(getContext()).load(drapeauList.get(1).getUrlImage()).into(imageButtonQuizzImageDeux);
+			Picasso.with(getContext()).load(drapeauList.get(2).getUrlImage()).into(imageButtonQuizzImageTrois);
+			Picasso.with(getContext()).load(drapeauList.get(3).getUrlImage()).into(imageButtonQuizzImageQuatre);
+			texteViewQuizzImage.setText(drapeauList.get(randomFlag.generateRandomInt(0,3)).getPays());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 
+	//////////////////////////////////////////////////////////////////////////////////////
+
+	//Interface pour le changement de fragment
+	public interface FragmentChanger {
+		public void remplacementDunFragmentUneFoisLeQuizzLance();
+	}
 
 
-    //redefinition de la methode onClick pour les actions des buttonImages
-    @Override
-    public void onClick(View view) {
-        Log.i("info","click sur une reponse");
-        mFragmentChanger.remplacementDunFragmentUneFoisLeQuizzLance();
-    }
+	//redefintion de la methode onAttach pour le changement de fragment
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		try {
+			mFragmentChanger = (FragmentChanger) context;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(context.toString() + " erreur On Attach");
+		}
+	}
 
 
-
-
-
-
-
+	//redefinition de la methode onClick pour les actions des buttonImages
+	@Override
+	public void onClick(View view) {
+		Log.i("info", "click sur une reponse");
+		mFragmentChanger.remplacementDunFragmentUneFoisLeQuizzLance();
+	}
 
 }//end.
