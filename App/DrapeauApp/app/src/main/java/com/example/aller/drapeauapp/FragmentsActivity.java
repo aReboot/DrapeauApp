@@ -163,14 +163,15 @@ public class FragmentsActivity extends AppCompatActivity implements
 		timerHandler.startTimer();
 		tourCount++;
 		Log.i("info", "choix d'un numero aleatoire pour le remplacement du fragment" + String.valueOf(randomInt));
-		if (fragmentsQuizzTexte.isVisible()) {
-			Log.i("info", "changement de fragment par le fragment image");
-			remplacementDuFragmentTexte();
+		if (tourCount < 10) {
+			if (fragmentsQuizzTexte.isVisible()) {
+				Log.i("info", "changement de fragment par le fragment image");
+				remplacementDuFragmentTexte();
+			} else {
+				Log.i("info", "changement de fragment par le fragment texte");
+				remplacementDuFragmentImage();
+			}
 		} else {
-			Log.i("info", "changement de fragment par le fragment texte");
-			remplacementDuFragmentImage();
-		}
-		if (tourCount >= 10) {
 			if (fragmentsQuizzTexte.isStateSaved()) {
 				fragmentTransaction.remove(fragmentsQuizzTexte);
 			} else if (fragmentsQuizzImage.isStateSaved()) {
