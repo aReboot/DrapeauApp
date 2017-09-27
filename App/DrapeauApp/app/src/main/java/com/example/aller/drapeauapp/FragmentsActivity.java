@@ -1,5 +1,6 @@
 package com.example.aller.drapeauapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -28,6 +29,7 @@ public class FragmentsActivity extends AppCompatActivity implements
 
 	//Int
 	private int randomInt;
+	private int tourCount;
 
 	//Fragment
 	private FragmentsQuizzImage fragmentsQuizzImage;
@@ -70,6 +72,9 @@ public class FragmentsActivity extends AppCompatActivity implements
 		//Fragment
 		fragmentsQuizzImage = new FragmentsQuizzImage();
 		fragmentsQuizzTexte = new FragmentsQuizzTexte();
+
+		// count
+		tourCount = 1;
 
 		//Application du fragment choisi au hasard a cette endroit
 		chargementDunFragmentEnAleatoireAuDebut();
@@ -156,6 +161,7 @@ public class FragmentsActivity extends AppCompatActivity implements
 	@Override
 	public void remplacementDunFragmentUneFoisLeQuizzLance() {
 		timerHandler.startTimer();
+		tourCount++;
 		Log.i("info", "choix d'un numero aleatoire pour le remplacement du fragment" + String.valueOf(randomInt));
 		if (fragmentsQuizzTexte.isVisible()) {
 			Log.i("info", "changement de fragment par le fragment image");
@@ -164,6 +170,20 @@ public class FragmentsActivity extends AppCompatActivity implements
 			Log.i("info", "changement de fragment par le fragment texte");
 			remplacementDuFragmentImage();
 		}
+		if (tourCount >= 10) {
+			if (fragmentsQuizzTexte.isStateSaved()) {
+				fragmentTransaction.remove(fragmentsQuizzTexte);
+			} else if (fragmentsQuizzImage.isStateSaved()) {
+				fragmentTransaction.remove(fragmentsQuizzImage);
+			}
+			timerHandler.stopTimer();
+			goToActivityResult();
+		}
+	}
+
+	public void goToActivityResult() {
+		Intent intent = new Intent(this, ResultatActivity.class);
+		startActivity(intent);
 	}
 
 	/*
