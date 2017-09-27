@@ -19,11 +19,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.aller.drapeauapp.R;
-import com.example.aller.drapeauapp.ResultatActivity;
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.modele.Drapeau;
 import com.example.aller.drapeauapp.modele.RandomFlag;
-import com.example.aller.drapeauapp.modele.Resultat;
 import com.squareup.picasso.Picasso;
 
 import java.sql.SQLException;
@@ -59,13 +57,6 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
 	// database
 	private DBConnection dbConnection;
-
-	// resultat
-	private Resultat resultat;
-
-	// drapeaux liste
-
-	private List<Drapeau> drapeauList = null;
 
 /*
 *###################################################################################################
@@ -110,7 +101,6 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
 		/////////////////////////////////////////////////////////////////////////////////////////
 
-		Resultat resultat = new Resultat("", "");
 
 		//On retourne la vue
 		return view;
@@ -148,7 +138,7 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 			int min = 1;
 			int max = dbConnection.getDaoDrapeau().queryForAll().size();
 			integers = randomFlag.generateRandomIntList(min, max, 4);
-			drapeauList = new ArrayList<>();
+			List<Drapeau> drapeauList = new ArrayList<>();
 			for (Integer i :
 					integers) {
 				drapeauList.add(dbConnection.getDaoDrapeau().queryForAll().get(i));
@@ -157,12 +147,9 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 			buttonQuizzTexteDeux.setText(drapeauList.get(1).getPays());
 			buttonQuizzTexteTrois.setText(drapeauList.get(2).getPays());
 			buttonQuizzTexteQuatre.setText(drapeauList.get(3).getPays());
-			int randomInt = randomFlag.generateRandomInt(0, 3);
-			Picasso.with(getContext()).load(drapeauList.get(randomInt)
+			Picasso.with(getContext()).load(drapeauList.get(randomFlag.generateRandomInt(0, 3))
 					.getUrlImage())
 					.into(imageViewQuizzTexte);
-			resultat = new Resultat("", "");
-			resultat.setCorrectAnswer(drapeauList.get(randomInt).getPays());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -194,16 +181,6 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 	@Override
 	public void onClick(View view) {
 		Log.i("info", "click sur un Button");
-		if (view.getId() == buttonQuizzTexteUn.getId()) {
-			resultat.setUserAnswer(drapeauList.get(0).getPays());
-		} else if (view.getId() == buttonQuizzTexteDeux.getId()) {
-			resultat.setUserAnswer(drapeauList.get(1).getPays());
-		} else if (view.getId() == buttonQuizzTexteTrois.getId()) {
-			resultat.setUserAnswer(drapeauList.get(2).getPays());
-		} else if (view.getId() == buttonQuizzTexteQuatre.getId()) {
-			resultat.setUserAnswer(drapeauList.get(3).getPays());
-		}
-		ResultatActivity.resultatList.add(resultat);
 		mFragmentChanger.remplacementDunFragmentUneFoisLeQuizzLance();
 	}
 

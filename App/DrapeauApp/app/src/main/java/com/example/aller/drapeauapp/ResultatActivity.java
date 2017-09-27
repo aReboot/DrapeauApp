@@ -27,7 +27,7 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
     private ListView listViewResultat;
 
     //modele resultat
-    public static List<Resultat> resultatList = new ArrayList<>();
+    private List<Resultat> resultatList;
 
 
 
@@ -44,6 +44,11 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultat);
+
+        resultatList = new ArrayList<>();
+        resultatList.add(new Resultat("France", "Pays-Bas"));
+        resultatList.add(new Resultat("Italy", ""));
+        resultatList.add(new Resultat("Portugal","Nope"));
 
         //Button
         buttonRecommencer=(Button)findViewById(R.id.buttonRecommencer);
@@ -72,6 +77,7 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
         }else{
             Intent intent= new Intent(ResultatActivity.this, MainActivity.class);
             startActivity(intent);
+
     }
 
 

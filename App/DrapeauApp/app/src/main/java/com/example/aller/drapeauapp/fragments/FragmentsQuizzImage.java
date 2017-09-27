@@ -17,11 +17,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.aller.drapeauapp.R;
-import com.example.aller.drapeauapp.ResultatActivity;
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.modele.Drapeau;
 import com.example.aller.drapeauapp.modele.RandomFlag;
-import com.example.aller.drapeauapp.modele.Resultat;
 import com.squareup.picasso.Picasso;
 
 import java.sql.SQLException;
@@ -55,12 +53,6 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 
 	// database
 	private DBConnection dbConnection = null;
-
-	// resultat
-	private Resultat resultat;
-
-	// Drapeaux quizz
-	private List<Drapeau> drapeauList = null;
 
 
 
@@ -105,10 +97,6 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 		drawable.setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
 		progressBarQuizzImage.setProgressDrawable(drawable);
 
-		// Resultat
-
-		resultat = new Resultat("", "");
-
 
 		//////////////////////////////////////////////////////////////////////////////////////
 
@@ -148,7 +136,7 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 			int min = 1;
 			int max = dbConnection.getDaoDrapeau().queryForAll().size();
 			integers = randomFlag.generateRandomIntList(min, max, 4);
-			drapeauList = new ArrayList<>();
+			List<Drapeau> drapeauList = new ArrayList<>();
 			for (Integer i:
 			     integers) {
 				drapeauList.add(dbConnection.getDaoDrapeau().queryForAll().get(i));
@@ -158,8 +146,6 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 			Picasso.with(getContext()).load(drapeauList.get(2).getUrlImage()).into(imageButtonQuizzImageTrois);
 			Picasso.with(getContext()).load(drapeauList.get(3).getUrlImage()).into(imageButtonQuizzImageQuatre);
 			texteViewQuizzImage.setText(drapeauList.get(randomFlag.generateRandomInt(0,3)).getPays());
-			resultat = new Resultat("", "");
-			resultat.setCorrectAnswer(texteViewQuizzImage.getText().toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -190,17 +176,6 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	@Override
 	public void onClick(View view) {
 		Log.i("info", "click sur une reponse");
-		if (view.getId() == imageButtonQuizzImageUn.getId()) {
-			resultat.setUserAnswer(drapeauList.get(0).getPays());
-		} else if (view.getId() == imageButtonQuizzImageDeux.getId()) {
-			resultat.setUserAnswer(drapeauList.get(1).getPays());
-		} else if (view.getId() == imageButtonQuizzImageTrois.getId()) {
-			resultat.setUserAnswer(drapeauList.get(2).getPays());
-		} else if (view.getId() == imageButtonQuizzImageQuatre.getId()) {
-			resultat.setUserAnswer(drapeauList.get(3).getPays());
-		}
-		ResultatActivity.resultatList.add(resultat);
-
 		mFragmentChanger.remplacementDunFragmentUneFoisLeQuizzLance();
 	}
 

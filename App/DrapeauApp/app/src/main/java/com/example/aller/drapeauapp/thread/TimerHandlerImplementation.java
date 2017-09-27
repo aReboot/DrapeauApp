@@ -27,7 +27,7 @@ public class TimerHandlerImplementation extends Handler implements TimerHandler 
 		super.handleMessage(msg);
 		fragmentsActivity.incrementProgressBar();
 		progress++;
-		if (progress >= 11) {
+		if (progress >= 10) {
 			resetTimer();
 			fragmentsActivity.resetProgressBar();
 			fragmentsActivity.remplacementDunFragmentUneFoisLeQuizzLance();
@@ -36,8 +36,6 @@ public class TimerHandlerImplementation extends Handler implements TimerHandler 
 
 	@Override
 	public void startTimer() {
-		progress = 0;
-		fragmentsActivity.resetProgressBar();
 		timerThread.start();
 	}
 
