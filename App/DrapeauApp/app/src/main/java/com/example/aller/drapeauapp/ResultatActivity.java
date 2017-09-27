@@ -58,11 +58,6 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
         listViewResultat.setAdapter(monAdapteurDeList);
     }
 
-
-
-
-
-
     //Redefinition de la methode onClick pour les actions des buttons
     @Override
     public void onClick(View view) {

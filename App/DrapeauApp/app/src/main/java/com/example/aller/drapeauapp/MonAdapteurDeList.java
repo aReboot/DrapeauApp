@@ -77,6 +77,7 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
             viewHolder.imageViewFlag = convertView.findViewById(R.id.imageViewFlag) ;
             viewHolder.textViewCorrectAnswer = convertView.findViewById(R.id.textViewCorrectAnswer);
             viewHolder.textViewUserAnswer = convertView.findViewById(R.id.textViewReponseUser);
+            convertView.setTag(viewHolder);
 
         }else{
             /*convertView n'est pas null, nous récupérons notre objet ViewHolder
