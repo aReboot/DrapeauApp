@@ -92,9 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.buttonCommencerMainActivity) {
             Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
             startActivity(intent);
-        }
-
-        if(view.getId()==R.id.buttonQuitterMainActivity){
+        }else {
             System.exit(0);
         }
 
