@@ -183,6 +183,9 @@ public class FragmentsActivity extends AppCompatActivity implements
 		}
 	}
 
+	/*
+	Chargement de l'activité gérant le résultat
+	 */
 	public void goToActivityResult() {
 		Intent intent = new Intent(this, ResultatActivity.class);
 		startActivity(intent);
@@ -200,6 +203,9 @@ public class FragmentsActivity extends AppCompatActivity implements
 		}
 	}
 
+	/*
+	Remet la progreessBar à zéro
+	 */
 	public void resetProgressBar() {
 		if (fragmentsQuizzTexte != null && fragmentsQuizzTexte.isVisible()) {
 			fragmentsQuizzTexte.resetProgressBar();

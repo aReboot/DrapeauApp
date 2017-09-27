@@ -114,6 +114,9 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 		return view;
 	}
 
+	/*
+	Au démarage un quizz est tirer au hasard
+	 */
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -122,8 +125,8 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
 
 	/*
-				Progress Bar
-				 */
+	Gestion de la ProgressBar
+	 */
 	@Override
 	public void incrementProgressBar() {
 		progressBarQuizzTexte.incrementProgressBy(1);
@@ -135,7 +138,7 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 	}
 
 	/*
-	GenerateQuizz
+	Gestion du quizz
 	 */
 	@Override
 	public void generateRandomQuizz() {

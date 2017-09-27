@@ -85,6 +85,7 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
 		}
 	}
 
+
 	private void computeScore() {
 		for (Resultat r : resultatList) {
 			if (r.getCorrectAnswer().equals(r.getUserAnswer())) {

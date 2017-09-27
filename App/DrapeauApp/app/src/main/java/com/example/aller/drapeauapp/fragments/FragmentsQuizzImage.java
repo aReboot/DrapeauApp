@@ -112,6 +112,9 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 		return view;
 	}
 
+	/*
+	On génère un quizz au chargement du fragment
+	 */
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -120,8 +123,8 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 
 
 	/*
-		Progress Bar
-		*/
+	Gestion de la progressBar
+	 */
 	@Override
 	public void incrementProgressBar() {
 		progressBarQuizzImage.incrementProgressBy(1);
@@ -133,7 +136,7 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	}
 
 	/*
-	GenerateQuizz
+	Gestion du quizz
 	 */
 	@Override
 	public void generateRandomQuizz() {

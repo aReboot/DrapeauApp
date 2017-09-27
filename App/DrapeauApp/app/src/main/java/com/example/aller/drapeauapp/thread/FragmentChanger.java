@@ -7,7 +7,7 @@ import com.example.aller.drapeauapp.modele.Resultat;
  */
 
 public interface FragmentChanger {
-    void remplacementDunFragmentUneFoisLeQuizzLance();
 
+	void remplacementDunFragmentUneFoisLeQuizzLance();
 
 }

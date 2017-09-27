@@ -23,6 +23,10 @@ public class TimerHandlerImplementation extends Handler implements TimerHandler 
 		progress = 0;
 	}
 
+	/*
+	Le thread renvoie toutes les secondes un message vide au handler ; le traitement se fait donc ici.
+	Au bout de 10 secondes on change le fragment et on remet la progressBar à zéro
+	 */
 	@Override
 	public void handleMessage(Message msg) {
 		super.handleMessage(msg);
