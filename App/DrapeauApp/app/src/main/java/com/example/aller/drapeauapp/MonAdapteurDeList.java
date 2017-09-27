@@ -103,10 +103,10 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
         Picasso.with(getContext()).load(urlImageForPicasso).into(viewHolder.imageViewFlag);
 
         //on écrit la bonne réponse dans le champs textViewCorrectAnswer
-        viewHolder.textViewCorrectAnswer.setText(resultat.getCorrectAnswer());
+        viewHolder.textViewCorrectAnswer.setText("Correct answer "+resultat.getCorrectAnswer());
 
         //on écrit la réponse de l'utilisateur dans textViewUserAnswer
-        viewHolder.textViewUserAnswer.setText(resultat.getUserAnswer());
+        viewHolder.textViewUserAnswer.setText("your answer "+resultat.getUserAnswer());
 
 
         return convertView;
