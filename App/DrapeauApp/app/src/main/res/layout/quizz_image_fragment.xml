@@ -12,9 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="26dp"
+        android:width="300dp"
+        android:height="35dp"
         android:background="@color/colorAccent"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="24sp" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ConstraintLayoutQuizzImageFragment"
@@ -22,12 +27,12 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/textViewQuizzImageFragment"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp">
+        android:layout_marginTop="60dp">
 
         <LinearLayout
             android:id="@+id/linearLayoutQuizzImageUne"
-            android:layout_width="0dp"
-            android:layout_height="69dp"
+            android:layout_width="337dp"
+            android:layout_height="75dp"
             android:layout_marginEnd="27dp"
             android:layout_marginStart="27dp"
             android:layout_marginTop="10dp"
@@ -37,29 +42,31 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1">
+            tools:layout_constraintTop_creator="1"
+            tools:layout_editor_absoluteY="10dp"
+            tools:layout_editor_absoluteX="23dp">
 
             <ImageButton
                 android:id="@+id/imageButtonQuizzImageUne"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:layout_width="141dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.17"
+                android:background="@android:color/transparent" />
 
             <ImageButton
                 android:id="@+id/imageButtonQuizzImageDeux"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:layout_width="162dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_weight="0.05" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayoutQuizzImageDeux"
-            android:layout_width="0dp"
-            android:layout_height="67dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
+            android:layout_width="337dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="27dp"
+            android:layout_marginStart="27dp"
             android:layout_marginTop="88dp"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -71,17 +78,17 @@
 
             <ImageButton
                 android:id="@+id/imageButtonQuizzImageTrois"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.20"
+                android:background="@android:color/transparent" />
 
             <ImageButton
                 android:id="@+id/imageButtonQuizzImageQuatre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.17"
+                android:background="@android:color/transparent" />
         </LinearLayout>
 
         <LinearLayout
