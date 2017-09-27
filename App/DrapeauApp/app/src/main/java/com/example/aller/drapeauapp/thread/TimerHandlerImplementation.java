@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.example.aller.drapeauapp.FragmentsActivity;
+import com.example.aller.drapeauapp.modele.Resultat;
 
 /**
  * Created by Adrien on 19/09/2017.

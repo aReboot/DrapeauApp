@@ -110,8 +110,6 @@ public class FragmentsQuizzTexte extends Fragment implements View.OnClickListene
 
 		/////////////////////////////////////////////////////////////////////////////////////////
 
-		Resultat resultat = new Resultat("", "");
-
 		//On retourne la vue
 		return view;
 	}

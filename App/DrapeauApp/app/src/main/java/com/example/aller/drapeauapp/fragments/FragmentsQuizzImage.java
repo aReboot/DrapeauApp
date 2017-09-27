@@ -105,10 +105,6 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 		drawable.setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
 		progressBarQuizzImage.setProgressDrawable(drawable);
 
-		// Resultat
-
-		resultat = new Resultat("", "");
-
 
 		//////////////////////////////////////////////////////////////////////////////////////
 

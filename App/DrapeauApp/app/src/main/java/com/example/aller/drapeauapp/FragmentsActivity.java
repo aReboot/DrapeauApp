@@ -11,6 +11,7 @@ import android.util.Log;
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzImage;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzTexte;
+import com.example.aller.drapeauapp.modele.Resultat;
 import com.example.aller.drapeauapp.thread.TimerHandler;
 import com.example.aller.drapeauapp.thread.TimerHandlerImplementation;
 
@@ -163,7 +164,7 @@ public class FragmentsActivity extends AppCompatActivity implements
 		timerHandler.startTimer();
 		tourCount++;
 		Log.i("info", "choix d'un numero aleatoire pour le remplacement du fragment" + String.valueOf(randomInt));
-		if (tourCount < 10) {
+		if (tourCount <= 10) {
 			if (fragmentsQuizzTexte.isVisible()) {
 				Log.i("info", "changement de fragment par le fragment image");
 				remplacementDuFragmentTexte();
