@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonCommencer = (Button) findViewById(R.id.buttonCommencerMainActivity);
         buttonCommencer.setOnClickListener(this);
 
-        buttonQuitter = (Button) findViewById(R.id.buttonQuitterMainActivity);
+        buttonQuitter = (Button) findViewById(R.id.buttonQuitterApp);
         buttonQuitter.setOnClickListener(this);
 
 
@@ -92,7 +92,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.buttonCommencerMainActivity) {
             Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
             startActivity(intent);
-        }else {
+        }
+
+        if(view.getId()==R.id.buttonQuitterApp){
+            finish();
             System.exit(0);
         }
 

@@ -58,7 +58,7 @@
                 android:text="Commencer" />
 
             <Button
-                android:id="@+id/buttonQuitterMainActivity"
+                android:id="@+id/buttonQuitterApp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Quitter" />

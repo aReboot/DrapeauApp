@@ -16,7 +16,6 @@
         android:width="300dp"
         android:height="35dp"
         android:background="@color/colorAccent"
-        android:text="TextView"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="24sp" />
