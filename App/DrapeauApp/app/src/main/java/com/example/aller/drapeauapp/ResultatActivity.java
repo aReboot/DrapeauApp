@@ -46,9 +46,6 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_resultat);
 
         resultatList = new ArrayList<>();
-        resultatList.add(new Resultat("France", "Pays-Bas"));
-        resultatList.add(new Resultat("Italy", ""));
-        resultatList.add(new Resultat("Portugal","Nope"));
 
         //Button
         buttonRecommencer=(Button)findViewById(R.id.buttonRecommencer);
@@ -73,7 +70,8 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
 
         if(view.getId()==R.id.buttonRecommencer){
-
+            Intent intent= new Intent(ResultatActivity.this, FragmentsActivity.class);
+            startActivity(intent);
         }else{
             Intent intent= new Intent(ResultatActivity.this, MainActivity.class);
             startActivity(intent);
