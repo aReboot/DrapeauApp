@@ -16,7 +16,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/windowsBackground</item>
         <item name="android:textColorPrimary">@color/windowsBackground</item>
-        <item name="android:buttonStyle">@color/colorPrimary</item>
+
         <item name="android:progressBarStyleHorizontal">@drawable/custom_progress_bar_horizontal</item>
 
     </style>
