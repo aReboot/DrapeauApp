@@ -33,8 +33,6 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-	//ImageButton
-	private ImageButton imageButtonMainActivity;
 
 
 
@@ -51,10 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		//Buttons
-		imageButtonMainActivity = (ImageButton) findViewById(R.id.imageButtonMainActivity);
-		imageButtonMainActivity.setOnClickListener(this);
 
 
 		//Conncetion a la base de donnees
@@ -89,12 +83,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	@Override
 	public void onClick(View view) {
 
-		if (view.getId() == R.id.imageButtonMainActivity) {
+
 			Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
 			startActivity(intent);
 		}
 
-	}
+
 
 
     /*
