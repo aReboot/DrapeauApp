@@ -1,14 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@android:style/Theme.Light.NoTitleBar">
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="android:background">#FEFEE2</item>
-        <item name="android:colorBackground">#FEFEE2</item>
+        <item name="android:windowBackground">@color/windowsBackground</item>
+
     </style>
 
 
