@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	//Button
 	private Button buttonCommencer;
-	private Button buttonQuitter;
+
 
 
 /*
@@ -55,10 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		buttonCommencer = (Button) findViewById(R.id.buttonCommencerMainActivity);
 		buttonCommencer.setOnClickListener(this);
 
-		buttonQuitter = (Button) findViewById(R.id.buttonQuitterApp);
-		buttonQuitter.setOnClickListener(this);
 
-
+		//Conncetion a la base de donnees
 		DBConnection connection = new DBConnection(this);
 
 		//WebService
@@ -93,11 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		if (view.getId() == R.id.buttonCommencerMainActivity) {
 			Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
 			startActivity(intent);
-		}
-
-		if (view.getId() == R.id.buttonQuitterApp) {
-			finish();
-			System.exit(0);
 		}
 
 	}
