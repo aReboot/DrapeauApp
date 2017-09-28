@@ -44,4 +44,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
     compile 'com.fasterxml.jackson.core:jackson-core:2.9.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    //library pour l'utlisation d'un gif
+    compile 'com.felipecsl:gifimageview:2.1.0'
 }

@@ -18,6 +18,7 @@ import com.example.aller.drapeauapp.modele.Country;
 import com.example.aller.drapeauapp.modele.Drapeau;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.felipecsl.gifimageview.library.GifImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 	private ProgressBar progressBar;
 	private ImageView imageGlobe;
 	private ImageView imageTouch;
+	private GifImageView gifImageView;
 
 	// Liste de Pays
 	private List<Country> countryList;
@@ -64,8 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
 		//Initialisation de la vue
 		progressBar = (ProgressBar)findViewById(R.id.progressBarMain);
-		imageGlobe = (ImageView)findViewById(R.id.imageView);
-		imageTouch = (ImageView)findViewById(R.id.imageViewTouchMe);
+		imageTouch=(ImageView)findViewById(R.id.imageViewTouch);
+		gifImageView=(GifImageView)findViewById(R.id.gifImageView);
+		gifImageView.startAnimation();
+
 
 		//Conncetion a la base de donnees
 		DBConnection connection = new DBConnection(this);
@@ -192,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 			progressBar.setVisibility(View.INVISIBLE);
 			imageTouch.setVisibility(View.VISIBLE);
 
-			imageGlobe.setOnClickListener(new View.OnClickListener() {
+			gifImageView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					loadFragmentActivity();
