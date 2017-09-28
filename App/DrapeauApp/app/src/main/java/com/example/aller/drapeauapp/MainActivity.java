@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
 	// views
 	private ProgressBar progressBar;
-	private ImageView touchTextView;
 	private ImageView imageGlobe;
+	private ImageView imageTouch;
 
 	// Liste de Pays
 	private List<Country> countryList;
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
 		//Initialisation de la vue
 		progressBar = (ProgressBar)findViewById(R.id.progressBarMain);
-		touchTextView = (ImageView) findViewById(R.id.imageViewTouchMe);
 		imageGlobe = (ImageView)findViewById(R.id.imageView);
+		imageTouch = (ImageView)findViewById(R.id.imageViewTouchMe);
 
 		//Conncetion a la base de donnees
 		DBConnection connection = new DBConnection(this);
@@ -115,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 
+			imageTouch.setVisibility(View.INVISIBLE);
 			progressBar.setVisibility(View.VISIBLE);
+
 		}
 
 		/*
@@ -188,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 			super.onPostExecute(s);
 
 			progressBar.setVisibility(View.INVISIBLE);
-
+			imageTouch.setVisibility(View.VISIBLE);
 
 			imageGlobe.setOnClickListener(new View.OnClickListener() {
 				@Override
