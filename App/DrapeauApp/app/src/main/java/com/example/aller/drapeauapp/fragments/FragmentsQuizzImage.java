@@ -45,7 +45,7 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	private ImageButton imageButtonQuizzImageDeux;
 	private ImageButton imageButtonQuizzImageTrois;
 	private ImageButton imageButtonQuizzImageQuatre;
-
+	private List<ImageButton> buttons;
 
 	//ProgressBar
 	private ProgressBar progressBarQuizzImage;
@@ -79,6 +79,7 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.quizz_image_fragment, container, false);
+		buttons = new ArrayList<>();
 
 		////////////////////////////////////////////////////////////////////////////////////
 		//TexteView
@@ -86,16 +87,18 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 
 		//ImageButton
 		imageButtonQuizzImageUn = view.findViewById(R.id.imageButtonQuizzImageUne);
-		imageButtonQuizzImageUn.setOnClickListener(this);
+		buttons.add(imageButtonQuizzImageUn);
 
 		imageButtonQuizzImageDeux = view.findViewById(R.id.imageButtonQuizzImageDeux);
-		imageButtonQuizzImageDeux.setOnClickListener(this);
+		buttons.add(imageButtonQuizzImageDeux);
 
 		imageButtonQuizzImageTrois = view.findViewById(R.id.imageButtonQuizzImageTrois);
-		imageButtonQuizzImageTrois.setOnClickListener(this);
+		buttons.add(imageButtonQuizzImageTrois);
 
 		imageButtonQuizzImageQuatre = view.findViewById(R.id.imageButtonQuizzImageQuatre);
-		imageButtonQuizzImageQuatre.setOnClickListener(this);
+		buttons.add(imageButtonQuizzImageQuatre);
+
+		addButtonsListeners();
 
 
 		//ProgressBar
@@ -105,6 +108,12 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 
 		//On retourne la vue
 		return view;
+	}
+
+	private void addButtonsListeners() {
+		for (ImageButton button : buttons) {
+			button.setOnClickListener(this);
+		}
 	}
 
 	/*
@@ -143,14 +152,12 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 			int max = dbConnection.getDaoDrapeau().queryForAll().size();
 			integers = randomFlag.generateRandomIntList(min, max, 4);
 			drapeauList = new ArrayList<>();
-			for (Integer i:
-			     integers) {
+			for (Integer i: integers) {
 				drapeauList.add(dbConnection.getDaoDrapeau().queryForAll().get(i));
 			}
-			Picasso.with(getContext()).load(drapeauList.get(0).getUrlImage()).into(imageButtonQuizzImageUn);
-			Picasso.with(getContext()).load(drapeauList.get(1).getUrlImage()).into(imageButtonQuizzImageDeux);
-			Picasso.with(getContext()).load(drapeauList.get(2).getUrlImage()).into(imageButtonQuizzImageTrois);
-			Picasso.with(getContext()).load(drapeauList.get(3).getUrlImage()).into(imageButtonQuizzImageQuatre);
+			for (int i = 0; i < drapeauList.size() && i < buttons.size(); i++) {
+				Picasso.with(getContext()).load(drapeauList.get(i).getUrlImage()).into(buttons.get(i));
+			}
 			texteViewQuizzImage.setText(drapeauList.get(randomFlag.generateRandomInt(0,3)).getPays());
 			resultat = new Resultat("", "");
 			resultat.setCorrectAnswer(texteViewQuizzImage.getText().toString());
@@ -184,14 +191,10 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	@Override
 	public void onClick(View view) {
 		Log.i("info", "click sur une reponse");
-		if (view.getId() == imageButtonQuizzImageUn.getId()) {
-			resultat.setUserAnswer(drapeauList.get(0).getPays());
-		} else if (view.getId() == imageButtonQuizzImageDeux.getId()) {
-			resultat.setUserAnswer(drapeauList.get(1).getPays());
-		} else if (view.getId() == imageButtonQuizzImageTrois.getId()) {
-			resultat.setUserAnswer(drapeauList.get(2).getPays());
-		} else if (view.getId() == imageButtonQuizzImageQuatre.getId()) {
-			resultat.setUserAnswer(drapeauList.get(3).getPays());
+		for (int i = 0; i < buttons.size(); i++) {
+			if (view.getId() == buttons.get(i).getId() ) {
+				resultat.setUserAnswer(drapeauList.get(i).getPays());
+			}
 		}
 		ResultatActivity.resultatList.add(resultat);
 
