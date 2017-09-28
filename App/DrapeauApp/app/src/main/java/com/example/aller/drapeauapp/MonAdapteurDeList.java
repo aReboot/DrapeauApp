@@ -108,13 +108,13 @@ public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
         //on écrit la bonne réponse dans le champs textViewCorrectAnswer
         if  (resultat.isCorrect()){
             viewHolder.textViewAnswer.setTextColor(Color.rgb(52,201,36));
-            viewHolder.textViewAnswer.setText(resultat.getCorrectAnswer()+" &#8730");
+            viewHolder.textViewAnswer.setText(resultat.getCorrectAnswer()+" √");
             viewHolder.textViewCorrectAnswer.setText("");
         }else{
             viewHolder.textViewAnswer.setTextColor(Color.rgb(221,20,20));
             viewHolder.textViewAnswer.setText(resultat.getUserAnswer()+" X");
             viewHolder.textViewCorrectAnswer.setTextColor(Color.rgb(52,201,36));
-            viewHolder.textViewCorrectAnswer.setText(resultat.getCorrectAnswer()+" &#8730");
+            viewHolder.textViewCorrectAnswer.setText(resultat.getCorrectAnswer()+" √");
         }
 
 
