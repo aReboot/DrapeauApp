@@ -9,10 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
-import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzImage;
 import com.example.aller.drapeauapp.fragments.FragmentsQuizzTexte;
-import com.example.aller.drapeauapp.modele.Resultat;
 import com.example.aller.drapeauapp.thread.TimerHandler;
 import com.example.aller.drapeauapp.thread.TimerHandlerImplementation;
 
@@ -87,56 +85,31 @@ public class FragmentsActivity extends AppCompatActivity implements
 	//Systeme aleatoire des Fragments au lancement de la partie
 
 	//Methode pour le debut de transaction pour eviter une repetition dans le code
-	public void debutDeTransaction() {
+	public void beginTransaction() {
 		//on doit utiliser un fragment manager
 		fragmentManager = getSupportFragmentManager();
 		//qui va lancer la transaction
 		fragmentTransaction = fragmentManager.beginTransaction();
 	}
 
-
-	//Methode pour charger le fragment QuizzTexte si celui est tire au hasard lord de la methode onCreate.
-	public void chargementFragmentQuizzTexte() {
-
-		//recupere les extras qui auraient ete eventuellement passés a l'activity
-		fragmentsQuizzTexte.setArguments(getIntent().getExtras());
-		//on doit utiliser un fragment manager
-		fragmentManager = getSupportFragmentManager();
-		//qui va lancer la transaction
-		fragmentTransaction = fragmentManager.beginTransaction();
-		//on demande une transaction au systeme Android
-		fragmentTransaction.add(R.id.relativeLayoutActivityFragment, fragmentsQuizzTexte);
-		//on commit la transaction
-		fragmentTransaction.commit();
-	}
-
-
-	//Methode pour charger le fragment QuizzImage si celui est tire au hasard lord de la methode onCreate.
-	public void chargementFragmentQuizzImage() {
-
-		//recupere les extras qui auraient ete eventuellement passés a l'activity
-		fragmentsQuizzImage.setArguments(getIntent().getExtras());
-		//on doit utiliser un fragment manager
-		fragmentManager = getSupportFragmentManager();
-		//qui va lancer la transaction
-		fragmentTransaction = fragmentManager.beginTransaction();
-		//on demande une transaction au systeme Android
-		fragmentTransaction.add(R.id.relativeLayoutActivityFragment, fragmentsQuizzImage);
-		//on commit la transaction
+	// méthode pour charger un fragment au lancement de l'activité
+	public void loadFragment(Fragment fragment) {
+		beginTransaction();
+		fragment.setArguments(getIntent().getExtras());
+		fragmentTransaction.add(R.id.relativeLayoutActivityFragment, fragment);
 		fragmentTransaction.commit();
 	}
 
 
 	//Methode pour le choix du fragment en aleatoire au debut.
-
 	public void chargementDunFragmentEnAleatoireAuDebut() {
 		timerHandler.startTimer();
 		randomInt = randomGenerateur.nextInt(2);
 		Log.i("info", "Choix de la vue grace a la methode Random qui va tirer un numero aleatoire, numero:" + String.valueOf(randomInt));
 		if (randomInt == 0) {
-			chargementFragmentQuizzTexte();
+			loadFragment(fragmentsQuizzTexte);
 		} else {
-			chargementFragmentQuizzImage();
+			loadFragment(fragmentsQuizzImage);
 		}
 	}
 
@@ -145,11 +118,11 @@ public class FragmentsActivity extends AppCompatActivity implements
 
 
 	//Methode pour remplacer un fragment apres avoir repondu a une qestion ou que le temps est ecoulé
-	public void loadFragment(Fragment fragment){
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragment);
-        fragmentTransaction.commit();
-    }
+	public void replaceFragment(Fragment fragment) {
+		beginTransaction();
+		fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragment);
+		fragmentTransaction.commit();
+	}
 
 
 	//Methode pour remplacer un fragment une fois le quizz lancé
@@ -161,10 +134,10 @@ public class FragmentsActivity extends AppCompatActivity implements
 		if (tourCount <= 10) {
 			if (fragmentsQuizzTexte.isVisible()) {
 				Log.i("info", "changement de fragment par le fragment image");
-				loadFragment(fragmentsQuizzTexte);
+				replaceFragment(fragmentsQuizzImage);
 			} else {
 				Log.i("info", "changement de fragment par le fragment texte");
-				loadFragment(fragmentsQuizzImage);
+				replaceFragment(fragmentsQuizzTexte);
 			}
 		} else {
 			if (fragmentsQuizzTexte.isStateSaved()) {

@@ -100,11 +100,6 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 
 		//ProgressBar
 		progressBarQuizzImage = view.findViewById(R.id.progressBarQuizzImage);
-		//Definition de la couleur de la ProgressBar
-		Drawable drawable = progressBarQuizzImage.getProgressDrawable();
-		drawable.setColorFilter(Color.CYAN, PorterDuff.Mode.MULTIPLY);
-		progressBarQuizzImage.setProgressDrawable(drawable);
-
 
 		//////////////////////////////////////////////////////////////////////////////////////
 
