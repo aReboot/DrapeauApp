@@ -1,18 +1,17 @@
 package com.example.aller.drapeauapp;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
+
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
+
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
 
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.modele.Country;
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 	// views
 	private ProgressBar progressBar;
-	private TextView touchTextView;
+	private ImageView touchTextView;
 	private ImageView imageGlobe;
 
 	// Liste de Pays
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 		//Initialisation de la vue
 		progressBar = (ProgressBar)findViewById(R.id.progressBarMain);
-		touchTextView = (TextView)findViewById(R.id.touchTextView);
+		touchTextView = (ImageView) findViewById(R.id.imageViewTouchMe);
 		imageGlobe = (ImageView)findViewById(R.id.imageView);
 
 		//Conncetion a la base de donnees
@@ -189,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 			super.onPostExecute(s);
 
 			progressBar.setVisibility(View.INVISIBLE);
-			touchTextView.setText("Touch me !");
+
 
 			imageGlobe.setOnClickListener(new View.OnClickListener() {
 				@Override

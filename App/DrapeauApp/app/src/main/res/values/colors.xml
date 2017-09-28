@@ -6,5 +6,5 @@
     <color name="navigationBarColor">#2D7396</color>
     <color name="windowsBackground">#fefee2</color>
     <color name="androidButton">#2D7396</color>
-    <color name="progressBar">#2D7396</color>
+    <color name="spinner">#2D7396</color>
 </resources>

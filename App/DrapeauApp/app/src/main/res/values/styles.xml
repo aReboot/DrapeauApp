@@ -10,8 +10,7 @@
         <item name="android:windowBackground">@color/windowsBackground</item>
         <item name="android:textColorPrimary">@color/windowsBackground</item>
         <item name="android:buttonStyle">@color/androidButton</item>
-        <item name="progressBar">@color/progressBar</item>
-
+        <item name="android:progressBarStyleHorizontal">@color/spinner</item>
 
 
     </style>
