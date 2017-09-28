@@ -101,7 +101,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="108dp"
                 android:layout_height="wrap_content"
-                android:text="temps restant" />
+                />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
