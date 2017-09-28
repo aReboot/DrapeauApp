@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 	private ProgressBar progressBar;
 	private ImageView imageGlobe;
 	private ImageView imageTouch;
-	private GifImageView gifImageView;
+	//private GifImageView gifImageView;
 
 	// Liste de Pays
 	private List<Country> countryList;
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 		//Initialisation de la vue
 		progressBar = (ProgressBar)findViewById(R.id.progressBarMain);
 		imageTouch=(ImageView)findViewById(R.id.imageViewTouch);
-		gifImageView=(GifImageView)findViewById(R.id.gifImageView);
-		gifImageView.startAnimation();
+		//gifImageView=(GifImageView)findViewById(R.id.gifImageView);
+		//gifImageView.startAnimation();
 
 
 		//Conncetion a la base de donnees
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		loadFragmentActivity();
 	}
 
 	public void loadFragmentActivity() {
@@ -196,12 +197,13 @@ public class MainActivity extends AppCompatActivity {
 			progressBar.setVisibility(View.INVISIBLE);
 			imageTouch.setVisibility(View.VISIBLE);
 
-			gifImageView.setOnClickListener(new View.OnClickListener() {
+			/*gifImageView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					loadFragmentActivity();
 				}
 			});
+			*/
 		}
 	}
 
