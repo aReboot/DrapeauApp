@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.modele.Country;
@@ -32,8 +33,8 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-	//Button
-	private Button buttonCommencer;
+	//ImageButton
+	private ImageButton imageButtonMainActivity;
 
 
 
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		setContentView(R.layout.activity_main);
 
 		//Buttons
-		buttonCommencer = (Button) findViewById(R.id.buttonCommencerMainActivity);
-		buttonCommencer.setOnClickListener(this);
+		imageButtonMainActivity = (ImageButton) findViewById(R.id.imageButtonMainActivity);
+		imageButtonMainActivity.setOnClickListener(this);
 
 
 		//Conncetion a la base de donnees
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 	@Override
 	public void onClick(View view) {
 
-		if (view.getId() == R.id.buttonCommencerMainActivity) {
+		if (view.getId() == R.id.imageButtonMainActivity) {
 			Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
 			startActivity(intent);
 		}
