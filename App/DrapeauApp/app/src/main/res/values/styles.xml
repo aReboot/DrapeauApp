@@ -8,6 +8,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/windowsBackground</item>
+        <item name="android:textColorPrimary">@color/windowsBackground</item>
+        <item name="android:buttonStyle">@color/androidButton</item>
+        <item name="progressBar">@color/progressBar</item>
+
+
 
     </style>
 
