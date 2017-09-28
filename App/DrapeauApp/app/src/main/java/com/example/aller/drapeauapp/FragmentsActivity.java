@@ -2,6 +2,7 @@ package com.example.aller.drapeauapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -144,18 +145,11 @@ public class FragmentsActivity extends AppCompatActivity implements
 
 
 	//Methode pour remplacer un fragment apres avoir repondu a une qestion ou que le temps est ecoulé
-
-	public void remplacementDuFragmentTexte() {
-		fragmentTransaction = getSupportFragmentManager().beginTransaction();
-		fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragmentsQuizzImage);
-		fragmentTransaction.commit();
-	}
-
-	public void remplacementDuFragmentImage() {
-		fragmentTransaction = getSupportFragmentManager().beginTransaction();
-		fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragmentsQuizzTexte);
-		fragmentTransaction.commit();
-	}
+	public void loadFragment(Fragment fragment){
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.relativeLayoutActivityFragment, fragment);
+        fragmentTransaction.commit();
+    }
 
 
 	//Methode pour remplacer un fragment une fois le quizz lancé
@@ -167,10 +161,10 @@ public class FragmentsActivity extends AppCompatActivity implements
 		if (tourCount <= 10) {
 			if (fragmentsQuizzTexte.isVisible()) {
 				Log.i("info", "changement de fragment par le fragment image");
-				remplacementDuFragmentTexte();
+				loadFragment(fragmentsQuizzTexte);
 			} else {
 				Log.i("info", "changement de fragment par le fragment texte");
-				remplacementDuFragmentImage();
+				loadFragment(fragmentsQuizzImage);
 			}
 		} else {
 			if (fragmentsQuizzTexte.isStateSaved()) {

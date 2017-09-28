@@ -2,7 +2,9 @@ package com.example.aller.drapeauapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,95 +29,97 @@ import java.util.List;
 public class MonAdapteurDeList extends ArrayAdapter<Resultat> {
 
 
-	DBConnection dbConnection = new DBConnection(getContext());
+    DBConnection dbConnection = new DBConnection(getContext());
 
 
-	/*
-	ViewHolder va nous permettre de ne pas devoir rechercher
-	les vues à chaque appel de getView, nous gagnons ainsi en performance
-	*/
-	private class ResusltatViewHolder {
-		public ImageView imageViewFlag;
-		public TextView textViewCorrectAnswer;
-		public TextView textViewUserAnswer;
-	}
+    /*ViewHolder va nous permettre de ne pas devoir rechercher
+    les vues à chaque appel de getView, nous gagnons ainsi en performance*/
+    private  class ResusltatViewHolder{
+        public ImageView imageViewFlag;
+        public TextView textViewAnswer;
+        public TextView textViewCorrectAnswer;
+    }
 
-	/*
-	*###################################################################################################
-	####################################################################################################
-	--------------------------------------------CONSTRUCTEUR--------------------------------------------
-	####################################################################################################
-	####################################################################################################
-	*/
+/*
+*###################################################################################################
+####################################################################################################
+--------------------------------------------CONSTRUCTEUR--------------------------------------------
+####################################################################################################
+####################################################################################################
+*/
+    public MonAdapteurDeList(Context context, List<Resultat> resultat) {
+        super(context, 0, resultat);
+    }
 
-	public MonAdapteurDeList(Context context, List<Resultat> resultat) {
-		super(context, 0, resultat);
-	}
+    /*
+*###################################################################################################
+####################################################################################################
+--------------------------------------------METHODES------------------------------------------------
+####################################################################################################
+####################################################################################################
+*/
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-	/*
-    *###################################################################################################
-    ####################################################################################################
-    --------------------------------------------METHODES------------------------------------------------
-    ####################################################################################################
-    ####################################################################################################
-    */
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+        String urlImageForPicasso = "";
+        ResusltatViewHolder viewHolder = null;
 
-		String urlImageForPicasso = "";
-		ResusltatViewHolder viewHolder = null;
-
-		// nous récupérons l'item de la liste demandé par getView
-		Resultat resultat = getItem(position);
+        // nous récupérons l'item de la liste demandé par getView
+        Resultat resultat = getItem(position);
 
 
-		// au premier appel ConvertView est null, on inflate notre layout
-		if (convertView == null) {
-			LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        // au premier appel ConvertView est null, on inflate notre layout
+        if (convertView == null) {
+            LayoutInflater mInflater = (LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
-			convertView = mInflater.inflate(R.layout.row_list_results, parent, false);
+            convertView = mInflater.inflate(R.layout.row_list_results, parent, false);
 
-			// nous plaçons dans notre ViewHolder les vues de notre layout
-			viewHolder = new ResusltatViewHolder();
-			viewHolder.imageViewFlag = convertView.findViewById(R.id.imageViewFlag);
-			viewHolder.textViewCorrectAnswer = convertView.findViewById(R.id.textViewCorrectAnswer);
-			viewHolder.textViewUserAnswer = convertView.findViewById(R.id.textViewReponseUser);
-			convertView.setTag(viewHolder);
+            // nous plaçons dans notre ViewHolder les vues de notre layout
+            viewHolder = new ResusltatViewHolder();
+            viewHolder.imageViewFlag = convertView.findViewById(R.id.imageViewFlag) ;
+            viewHolder.textViewAnswer = convertView.findViewById(R.id.textViewAnswer);
+            viewHolder.textViewCorrectAnswer = convertView.findViewById(R.id.textViewCorrectAnswer);
+            convertView.setTag(viewHolder);
 
-		} else {
-		    /*
-		    convertView n'est pas null, nous récupérons notre objet ViewHolder
-		    et évitons ainsi de devoir retrouver les vues à chaque appel de getView
-		    */
-			viewHolder = (ResusltatViewHolder) convertView.getTag();
-		}
+        }else{
+            /*convertView n'est pas null, nous récupérons notre objet ViewHolder
+            et évitons ainsi de devoir retrouver les vues à chaque appel de getView*/
+            viewHolder = (ResusltatViewHolder)convertView.getTag();
+        }
 
 
-		try {
-			Log.i("MODELE", " resultat correct answer renvoie " + resultat.getCorrectAnswer());
-			Log.i("DAO", " test sur le dao " + dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage());
 
-			//on récupère l'url correspondant aux pays de la bonne réponse
-			urlImageForPicasso = dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage();
+        try {
+            Log.i("MODELE"," resultat correct answer renvoie "+resultat.getCorrectAnswer());
+            Log.i("DAO", " test sur le dao "+dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage());
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+            //on récupère l'url correspondant aux pays de la bonne réponse
+            urlImageForPicasso = dbConnection.getDaoDrapeau().queryForId(resultat.getCorrectAnswer()).getUrlImage();
 
-		Log.i("IMAGE", "Tu me renvoie quoi ? " + Picasso.with(getContext()).load(urlImageForPicasso).toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-		//la librairie picasso nous met la bonne image correspondant à la bonne réponse
-		Picasso.with(getContext()).load(urlImageForPicasso).into(viewHolder.imageViewFlag);
+        Log.i("IMAGE","Tu me renvoie quoi ? "+Picasso.with(getContext()).load(urlImageForPicasso).toString());
 
-		//on écrit la bonne réponse dans le champs textViewCorrectAnswer
-		viewHolder.textViewCorrectAnswer.setText("Correct answer " + resultat.getCorrectAnswer());
+        //la librairie picasso nous met la bonne image correspondant à la bonne réponse
+        Picasso.with(getContext()).load(urlImageForPicasso).into(viewHolder.imageViewFlag);
 
-		//on écrit la réponse de l'utilisateur dans textViewUserAnswer
-		viewHolder.textViewUserAnswer.setText("your answer " + resultat.getUserAnswer());
+        //on écrit la bonne réponse dans le champs textViewCorrectAnswer
+        if  (resultat.isCorrect()){
+            viewHolder.textViewAnswer.setTextColor(Color.rgb(52,201,36));
+            viewHolder.textViewAnswer.setText(resultat.getCorrectAnswer()+" &#8730");
+            viewHolder.textViewCorrectAnswer.setText("");
+        }else{
+            viewHolder.textViewAnswer.setTextColor(Color.rgb(221,20,20));
+            viewHolder.textViewAnswer.setText(resultat.getUserAnswer()+" X");
+            viewHolder.textViewCorrectAnswer.setTextColor(Color.rgb(52,201,36));
+            viewHolder.textViewCorrectAnswer.setText(resultat.getCorrectAnswer()+" &#8730");
+        }
 
 
-		return convertView;
-	}
+        return convertView;
+    }
 
 
 }
