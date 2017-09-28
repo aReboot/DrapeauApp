@@ -6,9 +6,9 @@ package com.example.aller.drapeauapp.modele;
 
 public class Resultat {
 
-    private String correctAnswer;
+	private String correctAnswer;
 
-    private String userAnswer;
+	private String userAnswer;
 
 /*
 *###################################################################################################
@@ -18,13 +18,18 @@ public class Resultat {
 ####################################################################################################
 */
 
-    public Resultat() {
-    }
+	public Resultat() {
+	}
 
-    public Resultat(String correctAnswer, String userAnswer) {
-        this.correctAnswer = correctAnswer;
-        this.userAnswer = userAnswer;
-    }
+	public Resultat(String correctAnswer, String userAnswer) {
+		this.correctAnswer = correctAnswer;
+		this.userAnswer = userAnswer;
+	}
+
+
+	public boolean isCorrect() {
+		return correctAnswer.equalsIgnoreCase(userAnswer);
+	}
 
     /*
 *###################################################################################################
@@ -34,26 +39,26 @@ public class Resultat {
 ####################################################################################################
 */
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
+	public String getCorrectAnswer() {
+		return correctAnswer;
+	}
 
-    public String getUserAnswer() {
-        return userAnswer;
-    }
+	public String getUserAnswer() {
+		return userAnswer;
+	}
 
-/*
-*###################################################################################################
-####################################################################################################
---------------------------------------------SETTERS------------------------------------------------
-####################################################################################################
-####################################################################################################
-*/
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
+	/*
+	*###################################################################################################
+	####################################################################################################
+	--------------------------------------------SETTERS------------------------------------------------
+	####################################################################################################
+	####################################################################################################
+	*/
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
+	}
 
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer;
-    }
+	public void setUserAnswer(String userAnswer) {
+		this.userAnswer = userAnswer;
+	}
 }
