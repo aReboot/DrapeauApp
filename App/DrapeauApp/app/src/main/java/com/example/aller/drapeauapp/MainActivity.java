@@ -6,9 +6,13 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.aller.drapeauapp.db.DBConnection;
 import com.example.aller.drapeauapp.modele.Country;
@@ -30,7 +34,16 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
+
+
+	// views
+	private ProgressBar progressBar;
+	private TextView touchTextView;
+	private ImageView imageGlobe;
+
+	// Liste de Pays
+	private List<Country> countryList;
 
 
 
@@ -50,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		//Initialisation de la vue
+		progressBar = (ProgressBar)findViewById(R.id.progressBarMain);
+		touchTextView = (TextView)findViewById(R.id.touchTextView);
+		imageGlobe = (ImageView)findViewById(R.id.imageView);
 
 		//Conncetion a la base de donnees
 		DBConnection connection = new DBConnection(this);
@@ -57,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		//WebService
 		Webservice webservice = new Webservice();
 		webservice.execute("http://www.geognos.com/api/en/countries/info/all.json");
-		List<Country> countryList = new ArrayList<>();
+		countryList = new ArrayList<>();
 		int count = 0;
 		try {
 			countryList = webservice.get();
@@ -79,16 +96,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	}
 
-	//Redefinition de la methode onClick pour les action des buttons.
-	@Override
-	public void onClick(View view) {
-
-
-			Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
-			startActivity(intent);
-		}
-
-
+	public void loadFragmentActivity() {
+		Intent intent = new Intent(MainActivity.this, FragmentsActivity.class);
+		startActivity(intent);
+	}
 
 
     /*
@@ -101,15 +112,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 	private class Webservice extends AsyncTask<String, String, List<Country>> {
 
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+			progressBar.setVisibility(View.VISIBLE);
+		}
+
 		/*
 		Here we get the JSON and convert it into a String, then we parse and retrieve informations we need
 		to build a new Country object with Jackson lib. In the end this method return the list of all countries
 		which were in JSON file.
-		 */
+		*/
 		@Override
 		protected List<Country> doInBackground(String... params) {
+
 			HttpURLConnection connection = null;
 			BufferedReader reader = null;
+			List<Country> countryList = null;
 
 			try {
 				// Getting URL from parametres
@@ -134,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 				JsonNode actualObj = objectMapper.readTree(finalJson);
 				// Get all country codes from JSON
 				List<String> codeList = actualObj.findValuesAsText("iso2");
-				List<Country> countryList = new ArrayList<>();
+				countryList = new ArrayList<>();
 
 				// Building the country List
 				for (int i = 0; i < codeList.size(); i++) {
@@ -167,6 +187,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 		@Override
 		protected void onPostExecute(List<Country> s) {
 			super.onPostExecute(s);
+
+			progressBar.setVisibility(View.INVISIBLE);
+			touchTextView.setText("Touch me !");
+
+			imageGlobe.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					loadFragmentActivity();
+				}
+			});
 		}
 	}
 
