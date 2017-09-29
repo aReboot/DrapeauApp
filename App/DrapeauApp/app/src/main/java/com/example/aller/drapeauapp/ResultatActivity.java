@@ -79,6 +79,7 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
 			Intent intent = new Intent(ResultatActivity.this, FragmentsActivity.class);
 			startActivity(intent);
 		} else {
+			resultatList.clear();
 			Intent intent = new Intent(ResultatActivity.this, MainActivity.class);
 			startActivity(intent);
 		}
