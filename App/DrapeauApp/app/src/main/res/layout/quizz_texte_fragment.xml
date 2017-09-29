@@ -12,7 +12,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="100dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_toStartOf="@+id/imageViewQuizzTexteFragment"
+        android:text="question "
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayoutQuizzTexteFragment"
@@ -26,20 +39,19 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutQuizzTexteFragment"
-            android:layout_width="360dp"
+            android:layout_width="0dp"
             android:layout_height="236dp"
             android:layout_marginBottom="115dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:weightSum="1"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayoutQuizzTexteFragmentDeux"
-            app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.405"
             tools:layout_constraintBottom_creator="1"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
@@ -111,13 +123,13 @@
 
         <LinearLayout
             android:id="@+id/linearLayoutQuizzTexteFragmentDeux"
-            android:layout_width="358dp"
+            android:layout_width="0dp"
             android:layout_height="153dp"
-            android:layout_marginEnd="13dp"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="273dp"
+            android:layout_marginEnd="61dp"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="309dp"
             android:orientation="horizontal"
-            app:layout_constraintHorizontal_bias="0.423"
+            android:weightSum="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -131,23 +143,19 @@
                 android:layout_width="240dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
-                android:max="10" />
+                android:max="10"
+                android:layout_weight="2.70" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="108dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="10"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="14dp"
-        android:layout_toStartOf="@+id/imageViewQuizzTexteFragment"
-        android:text="question " />
 
 </RelativeLayout>
