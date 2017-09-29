@@ -107,8 +107,7 @@ FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBa
 		imageViewQuizzTexte = view.findViewById(R.id.imageViewQuizzTexteFragment);
 
 		timer = view.findViewById(R.id.textView3);
-		timerValue = 10;
-		timer.setText(String.valueOf(timerValue));
+		timerValue = 11;
 
 		//ProgressBar
 		progressBarQuizzTexte = view.findViewById(R.id.progressBarQuizzTexte);

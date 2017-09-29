@@ -62,6 +62,9 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	// Drapeaux quizz
 	private List<Drapeau> drapeauList = null;
 
+	private TextView timer;
+	private int timerValue;
+
 
 
 /*
@@ -100,6 +103,9 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 
 		addButtonsListeners();
 
+		timer = view.findViewById(R.id.textViewTimer);
+		timerValue = 11;
+
 
 		//ProgressBar
 		progressBarQuizzImage = view.findViewById(R.id.progressBarQuizzImage);
@@ -132,6 +138,8 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	@Override
 	public void incrementProgressBar() {
 		progressBarQuizzImage.incrementProgressBy(1);
+		timerValue--;
+		timer.setText(String.valueOf(timerValue));
 	}
 
 	@Override
