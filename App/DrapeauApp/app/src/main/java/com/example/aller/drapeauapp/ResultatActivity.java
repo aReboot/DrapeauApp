@@ -76,10 +76,12 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
 	public void onClick(View view) {
 		if (view.getId() == R.id.buttonRecommencer) {
 			resultatList.clear();
+			FragmentsActivity.questionNumber = 1;
 			Intent intent = new Intent(ResultatActivity.this, FragmentsActivity.class);
 			startActivity(intent);
 		} else {
 			resultatList.clear();
+			FragmentsActivity.questionNumber = 1;
 			Intent intent = new Intent(ResultatActivity.this, MainActivity.class);
 			startActivity(intent);
 		}

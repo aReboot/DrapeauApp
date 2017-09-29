@@ -44,6 +44,9 @@ public class FragmentsActivity extends AppCompatActivity implements
 	//TimerHandler
 	private TimerHandler timerHandler;
 
+	// numero de question
+	public static int questionNumber = 1;
+
 /*
 *###################################################################################################
 ####################################################################################################
@@ -130,6 +133,7 @@ public class FragmentsActivity extends AppCompatActivity implements
 	public void remplacementDunFragmentUneFoisLeQuizzLance() {
 		timerHandler.startTimer();
 		tourCount++;
+		questionNumber++;
 		Log.i("info", "choix d'un numero aleatoire pour le remplacement du fragment" + String.valueOf(randomInt));
 		if (tourCount <= 10) {
 			if (fragmentsQuizzTexte.isVisible()) {

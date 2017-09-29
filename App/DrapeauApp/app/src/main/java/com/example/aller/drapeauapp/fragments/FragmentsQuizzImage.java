@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.aller.drapeauapp.FragmentsActivity;
 import com.example.aller.drapeauapp.R;
 import com.example.aller.drapeauapp.ResultatActivity;
 import com.example.aller.drapeauapp.db.DBConnection;
@@ -63,6 +64,7 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	private List<Drapeau> drapeauList = null;
 
 	private TextView timer;
+	private TextView question;
 	private int timerValue;
 
 
@@ -104,7 +106,10 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 		addButtonsListeners();
 
 		timer = view.findViewById(R.id.textViewTimer);
+		question = view.findViewById(R.id.textView2);
+		question.setText("Question " + FragmentsActivity.questionNumber);
 		timerValue = 11;
+
 
 
 		//ProgressBar
