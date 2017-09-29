@@ -9,6 +9,8 @@ import android.util.Log;
 
 import android.view.View;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -70,11 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
 		//Initialisation de la vue
 		progressBar = (ProgressBar) findViewById(R.id.progressBarMain);
-		imageTouch = (ImageView) findViewById(R.id.imageViewTouch);
+
 		gifImageButton = (GifImageButton) findViewById(R.id.gifImageView);
 
+		//ImageView Touch clignotante.
+		imageTouch = (ImageView) findViewById(R.id.imageViewTouch);
 		imageTouch.setVisibility(View.INVISIBLE);
-
+		clignoterTouchMe();
 
 		//Conncetion a la base de donnees
 		connection = new DBConnection(this);
@@ -112,6 +116,20 @@ public class MainActivity extends AppCompatActivity {
 			e.printStackTrace();
 		}
 	}
+
+
+	//Methode pour faire clignoter l'image touchMe
+	public void clignoterTouchMe(){
+		Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+		fadeIn.reset();
+		Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+		fadeOut.reset();
+		ImageView iv = (ImageView) findViewById(R.id.imageViewTouch);
+		iv.clearAnimation();
+		iv.startAnimation(fadeIn);
+		iv.startAnimation(fadeOut);
+	}
+
 
 
     /*
