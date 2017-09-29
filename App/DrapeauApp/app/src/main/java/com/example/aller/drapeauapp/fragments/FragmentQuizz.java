@@ -69,7 +69,7 @@ public abstract class FragmentQuizz extends Fragment {
         RandomFlag randomFlag = new RandomFlag();
         int flagsListSize = allFlagsList.size();
         List<Integer> integers = randomFlag
-                .generateRandomIntList(FIRSTELEMENTINDB, flagsListSize, SIZEOFQUIZZ);
+                .generateRandomIntList(FIRSTELEMENTINDB, flagsListSize - 1, SIZEOFQUIZZ);
         questionIndex = randomFlag.generateRandomInt(0, SIZEOFQUIZZ - 1);
         try {
             buildFlagList(integers);
