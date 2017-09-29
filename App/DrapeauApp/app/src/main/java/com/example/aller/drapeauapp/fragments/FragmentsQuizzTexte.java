@@ -36,43 +36,18 @@ import java.util.List;
  */
 
 public class
-FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBarProgression, generateQuizz {
+FragmentsQuizzTexte extends FragmentQuizz implements View.OnClickListener {
 
-    //FontFamily
-    private ReplaceFont replaceFont;
+    //View
+    private ImageView imageViewQuizzTexte;
+    private List<Button> buttonList;
+    private TextView timer;
+    private TextView question;
+    private ProgressBar progressBarQuizzTexte;
 
-	//FramgmentActivity
-	private FragmentActivity fragmentActivity;
+    private FragmentActivity fragmentActivity;
 
-	//ImageView
-	private ImageView imageViewQuizzTexte;
-
-	//Button
-	private Button buttonQuizzTexteUn;
-	private Button buttonQuizzTexteDeux;
-	private Button buttonQuizzTexteTrois;
-	private Button buttonQuizzTexteQuatre;
-
-	private TextView timer;
-	private TextView question;
-	private int timerValue;
-
-	//ProgressBar
-	private ProgressBar progressBarQuizzTexte;
-
-
-	//Interface
-	private FragmentChanger mFragmentChanger;
-
-	// database
-	private DBConnection dbConnection;
-
-	// resultat
-	private Resultat resultat;
-
-	// drapeaux liste
-
-	private List<Drapeau> drapeauList = null;
+    private int timerValue;
 
 /*
 *###################################################################################################
@@ -82,147 +57,94 @@ FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBa
 ####################################################################################################
 */
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-	//redefinition de la methode onCreate View
-	@Nullable
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.quizz_texte_fragment, container, false);
 
-		View view = inflater.inflate(R.layout.quizz_texte_fragment, container, false);
-		ReplaceFont.replaceDefaultFont(getContext(),"DEFAULT","Champagne & Limousines.ttf");
+        //Button
+        buttonList = new ArrayList<>();
+        buttonList.add((Button) view.findViewById(R.id.buttonQuizzTexteUn));
+        buttonList.add((Button) view.findViewById(R.id.buttonQuizzTexteDeux));
+        buttonList.add((Button) view.findViewById(R.id.buttonQuizzTexteTrois));
+        buttonList.add((Button) view.findViewById(R.id.buttonQuizzTexteQuatre));
+        addButtonListener();
 
-		////////////////////////////////////////////////////////////////////////////////////////
-		//Button
-		buttonQuizzTexteUn = view.findViewById(R.id.buttonQuizzTexteUn);
-		buttonQuizzTexteUn.setOnClickListener(this);
+        //imageView
+        imageViewQuizzTexte = view.findViewById(R.id.imageViewQuizzTexteFragment);
 
-		buttonQuizzTexteDeux = view.findViewById(R.id.buttonQuizzTexteDeux);
-		buttonQuizzTexteDeux.setOnClickListener(this);
+        // timer
+        timer = view.findViewById(R.id.textView3);
+        timerValue = 11;
 
-		buttonQuizzTexteTrois = view.findViewById(R.id.buttonQuizzTexteTrois);
-		buttonQuizzTexteTrois.setOnClickListener(this);
+        // textView
+        question = view.findViewById(R.id.textView);
+        question.setText("Question " + FragmentsActivity.questionNumber);
 
-		buttonQuizzTexteQuatre = view.findViewById(R.id.buttonQuizzTexteQuatre);
-		buttonQuizzTexteQuatre.setOnClickListener(this);
+        //ProgressBar
+        progressBarQuizzTexte = view.findViewById(R.id.progressBarQuizzTexte);
 
-		//imageView
-		imageViewQuizzTexte = view.findViewById(R.id.imageViewQuizzTexteFragment);
-		timer = view.findViewById(R.id.textView3);
+        generateRandomQuizz();
 
-		timerValue = 11;
-		question = view.findViewById(R.id.textView);
-		question.setText("Question " + FragmentsActivity.questionNumber);
+        return view;
+    }
 
-		//ProgressBar
-		progressBarQuizzTexte = view.findViewById(R.id.progressBarQuizzTexte);
+    private void addButtonListener() {
+        for (Button button : buttonList)
+            button.setOnClickListener(this);
+    }
 
-		/////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    Gestion de la ProgressBar
+     */
+    @Override
+    public void incrementProgressBar() {
+        progressBarQuizzTexte.incrementProgressBy(1);
+        setCounter();
+    }
 
-		//On retourne la vue
-		return view;
-	}
+    private void setCounter() {
+        timerValue--;
+        timer.setText(String.valueOf(timerValue));
+    }
 
-	/*
-	Au démarage un quizz est tirer au hasard
-	 */
-	@Override
-	public void onStart() {
-		super.onStart();
-		generateRandomQuizz();
-	}
-
-
-	/*
-	Gestion de la ProgressBar
-	 */
-	@Override
-	public void incrementProgressBar() {
-		progressBarQuizzTexte.incrementProgressBy(1);
-		timerValue--;
-		timer.setText(String.valueOf(timerValue));
-	}
-
-	@Override
-	public void resetProgressBar() {
-		progressBarQuizzTexte.setProgress(0);
-	}
-
-	/*
-	Gestion du quizz
-	 */
-	@Override
-	public void generateRandomQuizz() {
-		try {
-			dbConnection = new DBConnection(getContext());
-			RandomFlag randomFlag = new RandomFlag();
-			List<Integer> integers = new ArrayList<>();
-			int min = 1;
-			int max = dbConnection.getDaoDrapeau().queryForAll().size();
-			integers = randomFlag.generateRandomIntList(min, max, 4);
-			drapeauList = new ArrayList<>();
-			for (Integer i :
-					integers) {
-				drapeauList.add(dbConnection.getDaoDrapeau().queryForAll().get(i));
-			}
-			buttonQuizzTexteUn.setText(drapeauList.get(0).getPays());
-			buttonQuizzTexteDeux.setText(drapeauList.get(1).getPays());
-			buttonQuizzTexteTrois.setText(drapeauList.get(2).getPays());
-			buttonQuizzTexteQuatre.setText(drapeauList.get(3).getPays());
-			int randomInt = randomFlag.generateRandomInt(0, 3);
-			Picasso.with(getContext()).load(drapeauList.get(randomInt)
-					.getUrlImage())
-					.into(imageViewQuizzTexte);
-			resultat = new Resultat("", "");
-			resultat.setCorrectAnswer(drapeauList.get(randomInt).getPays());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    @Override
+    public void resetProgressBar() {
+        progressBarQuizzTexte.setProgress(0);
+    }
 
 
-	/////////////////////////////////////////////////////////////////////////////////
+    /*
+    Gestion du clique utilisateur
+     */
+    @Override
+    public void onClick(View view) {
+        Log.i("info", "click sur un Button");
+        for (int i = 0; i < buttonList.size(); i++) {
+            if (view.getId() == buttonList.get(i).getId()) {
+                getResultat().setUserAnswer(getFlagsForQuizzList().get(i).getPays());
+            }
+        }
+        ResultatActivity.resultatList.add(getResultat());
+        getCallBack().changeFragment();
+    }
 
+    /*
+    Méthodes héritées de FragmentQuizz, ces deux méthodes changent selon le type de fragment
+     */
+    @Override
+    void setQuestion() {
+        Picasso.with(getContext())
+                .load(getFlagsForQuizzList().get(getQuestionIndex()).getUrlImage())
+                .into(imageViewQuizzTexte);
+    }
 
-	//Interface pour le changement de fragment
-	public interface FragmentChanger {
-		public void remplacementDunFragmentUneFoisLeQuizzLance();
-	}
-
-
-	//redefintion de la methode onAttach pour le changement de fragment
-	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
-		try {
-			mFragmentChanger = (FragmentChanger) context;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(context.toString() + " Erreur onAttach");
-		}
-	}
-
-
-	//Redefintion de la methode onClick pour les actions des boutons
-	@Override
-	public void onClick(View view) {
-		Log.i("info", "click sur un Button");
-		if (view.getId() == buttonQuizzTexteUn.getId()) {
-			resultat.setUserAnswer(drapeauList.get(0).getPays());
-		} else if (view.getId() == buttonQuizzTexteDeux.getId()) {
-			resultat.setUserAnswer(drapeauList.get(1).getPays());
-		} else if (view.getId() == buttonQuizzTexteTrois.getId()) {
-			resultat.setUserAnswer(drapeauList.get(2).getPays());
-		} else if (view.getId() == buttonQuizzTexteQuatre.getId()) {
-			resultat.setUserAnswer(drapeauList.get(3).getPays());
-		}
-		ResultatActivity.resultatList.add(resultat);
-		mFragmentChanger.remplacementDunFragmentUneFoisLeQuizzLance();
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		if (resultat.getUserAnswer().equals(""))
-			ResultatActivity.resultatList.add(resultat);
-	}
+    @Override
+    void setProposals() {
+        for (int i = 0; i < getFlagsForQuizzList().size(); i++) {
+            buttonList.get(i).setText(getFlagsForQuizzList().get(i).getPays());
+        }
+    }
 
 }//end.
