@@ -201,4 +201,11 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 		mFragmentChanger.remplacementDunFragmentUneFoisLeQuizzLance();
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (resultat.getUserAnswer().equals(""))
+			ResultatActivity.resultatList.add(resultat);
+	}
+
 }//end.

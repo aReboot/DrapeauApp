@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.aller.drapeauapp.R;
 import com.example.aller.drapeauapp.ResultatActivity;
@@ -50,6 +51,9 @@ FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBa
 	private Button buttonQuizzTexteDeux;
 	private Button buttonQuizzTexteTrois;
 	private Button buttonQuizzTexteQuatre;
+
+	private TextView timer;
+	private int timerValue;
 
 	//ProgressBar
 	private ProgressBar progressBarQuizzTexte;
@@ -102,6 +106,10 @@ FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBa
 		//imageView
 		imageViewQuizzTexte = view.findViewById(R.id.imageViewQuizzTexteFragment);
 
+		timer = view.findViewById(R.id.textView3);
+		timerValue = 10;
+		timer.setText(String.valueOf(timerValue));
+
 		//ProgressBar
 		progressBarQuizzTexte = view.findViewById(R.id.progressBarQuizzTexte);
 
@@ -127,6 +135,8 @@ FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBa
 	@Override
 	public void incrementProgressBar() {
 		progressBarQuizzTexte.incrementProgressBy(1);
+		timerValue--;
+		timer.setText(String.valueOf(timerValue));
 	}
 
 	@Override
@@ -205,5 +215,11 @@ FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBa
 		mFragmentChanger.remplacementDunFragmentUneFoisLeQuizzLance();
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (resultat.getUserAnswer().equals(""))
+			ResultatActivity.resultatList.add(resultat);
+	}
 
 }//end.
