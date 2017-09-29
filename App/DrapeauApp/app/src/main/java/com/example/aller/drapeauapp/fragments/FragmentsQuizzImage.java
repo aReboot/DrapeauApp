@@ -1,9 +1,6 @@
 package com.example.aller.drapeauapp.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.aller.drapeauapp.FragmentsActivity;
+import com.example.aller.drapeauapp.ReplaceFont;
 import com.example.aller.drapeauapp.R;
 import com.example.aller.drapeauapp.ResultatActivity;
 import com.example.aller.drapeauapp.db.DBConnection;
@@ -67,6 +65,8 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	private TextView question;
 	private int timerValue;
 
+	private ReplaceFont replaceFont;
+
 
 
 /*
@@ -84,11 +84,14 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.quizz_image_fragment, container, false);
+        ReplaceFont.replaceDefaultFont(getContext(),"DEFAULT","Champagne & Limousines.ttf");
+
 		buttons = new ArrayList<>();
 
 		////////////////////////////////////////////////////////////////////////////////////
 		//TexteView
 		texteViewQuizzImage = view.findViewById(R.id.textViewQuizzImageFragment);
+
 
 		//ImageButton
 		imageButtonQuizzImageUn = view.findViewById(R.id.imageButtonQuizzImageUne);

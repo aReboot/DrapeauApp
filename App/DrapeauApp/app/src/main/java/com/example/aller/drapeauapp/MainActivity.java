@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		ReplaceFont.replaceDefaultFont(this,"SERIF","Champagne & Limousines.ttf");
 
 		//Initialisation de la vue
 		progressBar = (ProgressBar) findViewById(R.id.progressBarMain);

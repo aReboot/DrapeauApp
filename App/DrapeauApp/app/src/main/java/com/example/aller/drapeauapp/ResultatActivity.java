@@ -50,6 +50,7 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_resultat);
+		ReplaceFont.replaceDefaultFont(this,"SERIF","Champagne & Limousines.ttf");
 
 		//Button
 		buttonRecommencer = (Button) findViewById(R.id.buttonRecommencer);

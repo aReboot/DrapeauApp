@@ -3,9 +3,6 @@ package com.example.aller.drapeauapp.fragments;
 
 import android.content.Context;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.aller.drapeauapp.FragmentsActivity;
+import com.example.aller.drapeauapp.ReplaceFont;
 import com.example.aller.drapeauapp.R;
 import com.example.aller.drapeauapp.ResultatActivity;
 import com.example.aller.drapeauapp.db.DBConnection;
@@ -40,6 +38,8 @@ import java.util.List;
 public class
 FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBarProgression, generateQuizz {
 
+    //FontFamily
+    private ReplaceFont replaceFont;
 
 	//FramgmentActivity
 	private FragmentActivity fragmentActivity;
@@ -89,7 +89,7 @@ FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBa
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.quizz_texte_fragment, container, false);
-
+		ReplaceFont.replaceDefaultFont(getContext(),"DEFAULT","Champagne & Limousines.ttf");
 
 		////////////////////////////////////////////////////////////////////////////////////////
 		//Button
@@ -107,8 +107,8 @@ FragmentsQuizzTexte extends Fragment implements View.OnClickListener, ProgressBa
 
 		//imageView
 		imageViewQuizzTexte = view.findViewById(R.id.imageViewQuizzTexteFragment);
-
 		timer = view.findViewById(R.id.textView3);
+
 		timerValue = 11;
 		question = view.findViewById(R.id.textView);
 		question.setText("Question " + FragmentsActivity.questionNumber);
