@@ -35,7 +35,7 @@ public class TimerHandlerImplementation extends Handler implements TimerHandler 
 		if (progress >= 11) {
 			resetTimer();
 			fragmentsActivity.resetProgressBar();
-			fragmentsActivity.remplacementDunFragmentUneFoisLeQuizzLance();
+			fragmentsActivity.changeFragment();
 		}
 	}
 

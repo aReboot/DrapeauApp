@@ -75,14 +75,12 @@ public class ResultatActivity extends AppCompatActivity implements View.OnClickL
 	//Redefinition de la methode onClick pour les actions des buttons
 	@Override
 	public void onClick(View view) {
+		resultatList.clear();
+		FragmentsActivity.questionNumber = 1;
 		if (view.getId() == R.id.buttonRecommencer) {
-			resultatList.clear();
-			FragmentsActivity.questionNumber = 1;
 			Intent intent = new Intent(ResultatActivity.this, FragmentsActivity.class);
 			startActivity(intent);
 		} else {
-			resultatList.clear();
-			FragmentsActivity.questionNumber = 1;
 			Intent intent = new Intent(ResultatActivity.this, MainActivity.class);
 			startActivity(intent);
 		}
