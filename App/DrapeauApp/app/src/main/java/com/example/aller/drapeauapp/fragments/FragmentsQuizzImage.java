@@ -56,7 +56,6 @@ public class FragmentsQuizzImage extends FragmentQuizz implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.quizz_image_fragment, container, false);
-        ReplaceFont.replaceDefaultFont(getContext(), "DEFAULT", "Champagne & Limousines.ttf");
 
         ////////////////////////////////////////////////////////////////////////////////////
         //TexteView
