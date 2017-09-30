@@ -84,7 +84,7 @@ public class FragmentsQuizzImage extends Fragment implements View.OnClickListene
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.quizz_image_fragment, container, false);
-        ReplaceFont.replaceDefaultFont(getContext(),"DEFAULT","Champagne & Limousines.ttf");
+
 
 		buttons = new ArrayList<>();
 
